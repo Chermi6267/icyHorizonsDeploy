@@ -1,0 +1,8 @@
+.env
+.env.local
+node_modules
+.next
+server/prisma/migrations
+server/public
+server/public
+dist
