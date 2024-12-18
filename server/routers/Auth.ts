@@ -10,7 +10,7 @@ const authController = new AuthController();
 authRouter.post(
   "/registration",
   [
-    check("email", "Адрес электронная почты не может быть пустым").notEmpty(),
+    check("email", "Адрес электронной почты не может быть пустым").notEmpty(),
     check("email", "Введите корректный адрес электронной почты").isEmail(),
     check("email", "Слишком длинный адрес электронной почты").isLength({
       max: 255,
@@ -27,13 +27,13 @@ authRouter.post(
     // Custom validation to check either password or sub is not empty
     check("password").custom((value, { req }) => {
       if (!value && !req.body.sub) {
-        throw new Error("Пароль и Sub не могут быть одновременно пустыми");
+        throw new Error("Пароль и Sub не могут быть пустыми одновременно");
       }
       return true;
     }),
     check("sub").custom((value, { req }) => {
       if (!value && !req.body.password) {
-        throw new Error("Пароль и Sub не могут быть одновременно пустыми");
+        throw new Error("Пароль и Sub не могут быть пустыми одновременно");
       }
       return true;
     }),
