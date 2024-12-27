@@ -17,9 +17,9 @@ function SliderImage(props: Props) {
         imgName.startsWith("/")
           ? imgName
           : isSmall
-          ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_IMG_URL}/my_api/landmark/image/small/${imgName}`
-          : `${process.env.NEXT_PUBLIC_SERVER_IMG_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_IMG_URL}/my_api/landmark/image/default/${imgName}`
-      }      
+          ? `${process.env.NEXT_PUBLIC_SERVER_IMG_URL}/landmark/image/small/${imgName}`
+          : `${process.env.NEXT_PUBLIC_SERVER_IMG_URL}/landmark/image/default/${imgName}`
+      }
       fill
       style={isSmall ? { filter: "blur(10px)" } : {}}
       alt="Здесь явно должна быть красивая картинка"

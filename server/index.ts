@@ -11,6 +11,8 @@ import { gracefulShutdown } from "./gracefulShutDown";
 import { Server } from "socket.io";
 import { GigaChatService } from "./services/GigaChat";
 import { userRouter } from "./routers/User";
+import { configDotenv } from "dotenv";
+configDotenv({ path: "./.env" });
 
 const app = express();
 app.use(cookieParser());

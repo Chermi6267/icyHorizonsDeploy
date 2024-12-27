@@ -3,7 +3,6 @@ import CheckBoxInput from "../checkBoxInput";
 import styles from "../styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategoryFilter } from "@/store/filtersSlice";
-import { useSearchParams } from "next/navigation";
 import { RootState } from "@/store";
 
 interface Props {

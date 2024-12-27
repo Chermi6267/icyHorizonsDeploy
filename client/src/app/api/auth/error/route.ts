@@ -11,7 +11,7 @@ export async function GET(request: Request) {
         errorParam ||
         "Ошибка при регистрации пользователя через сторонний сервис."
       }`,
-      "https://chermi6267.ru"
+      `${process.env.NEXTAUTH_URL}`
     )
   );
 }

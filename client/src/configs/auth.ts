@@ -27,10 +27,9 @@ export const authConfig: AuthOptions = {
     signIn: async ({ account, profile }) => {
       try {
         const extendedProfile = profile as ExtendedProfile;
-	console.log(account?.provider)
         if (account?.provider === "google") {
           const response = await axios.post(
-            "https://chermi6267.ru/my_api/auth/registration",
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/registration`,
             {
               email: extendedProfile?.email,
               sub: extendedProfile?.sub,

@@ -2,7 +2,7 @@
 
 import Logo from "../svg/logo";
 import styles from "./style.module.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import useAuth from "@/hook/useAuth";
 import Image from "next/image";
 import { logoutHandler } from "@/handlers/logoutHandler";
@@ -40,10 +40,13 @@ function Header(props: Props) {
   }, [prevScrollPos]);
 
   const clientCondition = isAuth && isClient;
+  const authHandlerMemo = useMemo(() => {
+    return <AuthHandler />;
+  }, []);
 
   return (
     <>
-      <AuthHandler />
+      {authHandlerMemo}
       <header
         className={`${styles.header} ${isVisible ? "" : styles.header_hidden}`}
       >
