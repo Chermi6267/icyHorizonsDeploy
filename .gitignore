@@ -6,3 +6,4 @@ server/prisma/migrations
 server/public
 server/public
 dist
+server/prisma/dev.db
