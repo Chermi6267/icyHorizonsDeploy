@@ -1,6 +1,31 @@
 import prisma from "./prismaClient";
 
 export class UserRepository {
+  async getUserDataById(userId: number) {
+    try {
+      const candidate = await prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+          profile: {
+            select: {
+              name: true,
+              avatar: true,
+              header: true,
+            },
+          },
+        },
+      });
+
+      if (candidate === null) {
+        return "USER";
+      }
+
+      return candidate;
+    } catch (error) {
+      throw Error(`Repository: ${error}`);
+    }
+  }
+
   async changeName(userId: number, newName: string) {
     try {
       const candidate = await prisma.user.findUnique({ where: { id: userId } });
@@ -68,6 +93,13 @@ export class UserRepository {
           email: true,
           role: true,
           loggedWith: true,
+          profile: {
+            select: {
+              avatar: true,
+              header: true,
+              name: true,
+            },
+          },
         },
       });
 

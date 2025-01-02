@@ -6,6 +6,46 @@ import { IUserRequest } from "../interfaces/User";
 const userService = new UserService();
 
 export class UserController {
+  async getUserDataById(req: Request, res: Response) {
+    try {
+      const userId = parseInt(req.params.id);
+      const result = await userService.getUserDataById(userId);
+
+      if (result === "USER") {
+        return res.status(404).json({ message: "Пользователь не найден" });
+      }
+
+      return res.json(result);
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Ошибка при получении данных пользователя" });
+    }
+  }
+
+  async getUserData(req: IUserRequest, res: Response) {
+    try {
+      const userId = req.user?.id;
+      if (userId === undefined) {
+        return res
+          .status(401)
+          .json({ message: "Не удалось получить access токен" });
+      }
+
+      const result = await userService.getUserData(userId);
+
+      if (result === "USER") {
+        return res.status(404).json({ message: "Пользователь не найден" });
+      }
+
+      return res.json(result);
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Ошибка при получении данных пользователя" });
+    }
+  }
+
   async changeName(req: IUserRequest, res: Response) {
     try {
       // Validation of the Registration Form
@@ -29,7 +69,7 @@ export class UserController {
         return res.status(404).json({ message: "Пользователь не найден" });
       }
 
-      res.clearCookie("refreshToken", {path: "/"});
+      res.clearCookie("refreshToken", { path: "/" });
       res.cookie(
         "refreshToken",
         result.refreshToken,
@@ -66,7 +106,7 @@ export class UserController {
         return res.status(404).json({ message: "Пользователь не найден" });
       }
 
-      res.clearCookie("refreshToken", {path: "/"});
+      res.clearCookie("refreshToken", { path: "/" });
       res.cookie(
         "refreshToken",
         result.refreshToken,
@@ -102,8 +142,8 @@ export class UserController {
       if (result === "USER") {
         return res.status(404).json({ message: "Пользователь не найден" });
       }
-      
-      res.clearCookie("refreshToken", {path: "/"});
+
+      res.clearCookie("refreshToken", { path: "/" });
       res.cookie(
         "refreshToken",
         result.refreshToken,

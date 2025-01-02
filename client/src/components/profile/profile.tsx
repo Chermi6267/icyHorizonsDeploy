@@ -28,7 +28,7 @@ function Profile({ user }: Props) {
     if (nameRef.current) {
       nameRef.current.innerHTML = user.name || "Ваше имя";
     }
-  }, []);
+  }, [user]);
 
   const handleNameChange = () => {
     if (nameRef.current) {

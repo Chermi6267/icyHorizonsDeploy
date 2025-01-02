@@ -7,6 +7,10 @@ import { multerMiddleware } from "../middlewares/multerUser";
 
 const userController = new UserController();
 
+userRouter.get("/:id", userController.getUserDataById);
+
+userRouter.get("/", isAuthenticated, userController.getUserData);
+
 userRouter.put(
   "/name",
   isAuthenticated,

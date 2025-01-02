@@ -11,6 +11,26 @@ const tokenRepository = new TokenRepository();
 const fileRepository = new FileRepository();
 
 export class UserService {
+  async getUserDataById(userId: number) {
+    try {
+      const result = await userRepository.getUserDataById(userId);
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserData(userId: number) {
+    try {
+      const result = await userRepository.getUserData(userId);
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async changeName(userId: number, newName: string) {
     try {
       const result = await userRepository.changeName(userId, newName);
