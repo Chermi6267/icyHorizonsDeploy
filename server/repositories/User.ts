@@ -29,7 +29,7 @@ export class UserRepository {
       const result = await prisma.profile.update({
         where: { userId: userId },
         data: {
-          avatar: `${process.env.IMG_PROTOCOL}://${process.env.IMG_URL}/my_api/user/avatar/${fileName}`,
+          avatar: `${process.env.IMG_URL}/user/avatar/${fileName}`,
         },
       });
 
@@ -49,7 +49,7 @@ export class UserRepository {
       const result = await prisma.profile.update({
         where: { userId: userId },
         data: {
-          header: `${process.env.IMG_PROTOCOL}://${process.env.IMG_URL}/my_api/user/header/${fileName}`,
+          header: `${process.env.IMG_URL}/user/header/${fileName}`,
         },
       });
 

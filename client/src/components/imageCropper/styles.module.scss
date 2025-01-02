@@ -1,0 +1,73 @@
+@import "../..//scss/variables.scss";
+@import "../..//scss/mixins.scss";
+
+.image_cropper_cont {
+  @include glass-shell;
+  background-color: $purple-color;
+  position: absolute;
+  width: 50%;
+  height: 70vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.image_cropper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  &__easy_crop_container {
+    border-radius: 15px;
+  }
+
+  &__btn_cont {
+    height: 4vh;
+    width: 100%;
+    @include flex-center;
+    gap: max(15px, 1vw);
+    position: absolute;
+    top: calc(100% + max(15px, 1vw));
+  }
+}
+
+.btn_cont {
+  &__btn {
+    &-submit {
+      @include button;
+      @media screen and (hover: hover) {
+        &:hover {
+          color: $green-color;
+          outline-color: $green-color;
+          transition: color, outline-color 150ms ease-in-out;
+        }
+      }
+    }
+
+    &-cancel {
+      @include button;
+      @media screen and (hover: hover) {
+        &:hover {
+          color: $error-color;
+          outline-color: $error-color;
+          transition: color, outline-color 150ms ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .image_cropper_cont {
+    width: 50%;
+    height: 40vh;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .image_cropper_cont {
+    width: 90%;
+    height: 60vh;
+  }
+}

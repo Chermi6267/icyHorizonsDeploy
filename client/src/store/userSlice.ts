@@ -45,11 +45,11 @@ export const userSlice = createSlice({
     },
 
     setNewAvatar: (state, action: PayloadAction<Pick<IUser, "avatar">>) => {
-      state.name = action.payload.avatar;
+      state.avatar = action.payload.avatar;
     },
 
     setNewHeader: (state, action: PayloadAction<Pick<IUser, "header">>) => {
-      state.name = action.payload.header;
+      state.header = action.payload.header;
     },
   },
 });

@@ -25,12 +25,17 @@
 
     &__header_avatar {
       margin-bottom: calc($size / 2);
+      height: calc(40vw * 9 / 21);
 
       &::before {
         bottom: calc(-0.5 * $size);
         width: $size;
         height: $size;
       }
+    }
+
+    &__header_input {
+      height: calc(40vw * 9 / 21);
     }
 
     &__avatar_input {
@@ -48,12 +53,17 @@
 
     &__header_avatar {
       margin-bottom: calc($size / 2);
+      height: calc(35vw * 9 / 21);
 
       &::before {
         bottom: calc(-0.5 * $size);
         width: $size;
         height: $size;
       }
+    }
+
+    &__header_input {
+      height: calc(35vw * 9 / 21);
     }
 
     &__avatar_input {

@@ -1,203 +1,85 @@
-"use client";
-
-import {
-  IUser,
-  setNewAvatar,
-  setNewHeader,
-  setNewName,
-  unsetUser,
-} from "@/store/userSlice";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
-import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logIn, logOut } from "@/store/authSlice";
 import { useRouter } from "next/navigation";
 import { logoutHandler } from "@/handlers/logoutHandler";
-import api from "@/http/api";
-import toast, { Toaster } from "react-hot-toast";
+import { changeNameHandler } from "./handlers/changeName";
+import { changeAvatarHandler } from "./handlers/changeAvatar";
+import { changeHeaderHandler } from "./handlers/changeHeader";
+import { IUser, unsetUser } from "@/store/userSlice";
+import { Toaster } from "react-hot-toast";
+import { logOut } from "@/store/authSlice";
+import ImageCropper from "@/components/imageCropper/imageCropper";
 
 interface Props {
   user: IUser;
 }
 
-function Profile(props: Props) {
-  const { user } = props;
+function Profile({ user }: Props) {
   const dispatch = useDispatch();
   const router = useRouter();
   const nameRef = useRef<HTMLDivElement>(null);
   const avatarInputRef = useRef<HTMLInputElement>(null);
   const headerInputRef = useRef<HTMLInputElement>(null);
+  const [imageCropperFormat, setImageCropperFormat] = useState(1);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    if (nameRef && nameRef.current) {
-      nameRef.current.innerHTML = user.name === null ? "Ваше имя" : user.name;
+    if (nameRef.current) {
+      nameRef.current.innerHTML = user.name || "Ваше имя";
     }
   }, []);
 
-  const changeNameHandler = () => {
-    if (nameRef && nameRef.current) {
-      if (nameRef.current.innerHTML !== user.name) {
-        api
-          .put("/user/name", { name: nameRef.current.innerHTML })
-          .then((res) => {
-            toast.success("Имя пользователя изменено", {
-              style: {
-                backgroundColor: "rgba(65, 67, 112, 0.25)",
-                outline: "2px solid rgba(65, 67, 112, 1)",
-                color: "white",
-                backdropFilter: "blur(2px)",
-              },
-
-              iconTheme: {
-                primary: "#a8cd9f",
-                secondary: "white",
-              },
-            });
-            localStorage.setItem("token", res.data.accessToken);
-            dispatch(setNewName({ name: `${res.data.newName}` }));
-            dispatch(logIn(res.data.accessToken));
-          })
-          .catch((error) => {
-            if (nameRef && nameRef.current) {
-              nameRef.current.innerHTML = user.name || "";
-            }
-            toast.error(error.response.data.message, {
-              style: {
-                backgroundColor: "rgba(65, 67, 112, 0.25)",
-                outline: "2px solid rgba(65, 67, 112, 1)",
-                color: "white",
-                backdropFilter: "blur(5px)",
-              },
-
-              iconTheme: {
-                primary: "#eb4335",
-                secondary: "white",
-              },
-            });
-
-            console.error(error);
-          });
-      }
+  const handleNameChange = () => {
+    if (nameRef.current) {
+      changeNameHandler(
+        nameRef.current.innerHTML,
+        user.name,
+        nameRef,
+        dispatch
+      );
     }
   };
 
-  const changeAvatarHandler = () => {
-    if (
-      avatarInputRef &&
-      avatarInputRef.current &&
-      avatarInputRef.current.files
-    ) {
+  const handleAvatarChange = async () => {
+    if (avatarInputRef.current?.files) {
+      setImageCropperFormat(1);
       const file = avatarInputRef.current.files[0];
-      if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        api
-          .put("/user/avatar", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((res) => {
-            toast.success("Фото профиля изменено", {
-              style: {
-                backgroundColor: "rgba(65, 67, 112, 0.25)",
-                outline: "2px solid rgba(65, 67, 112, 1)",
-                color: "white",
-                backdropFilter: "blur(2px)",
-              },
-
-              iconTheme: {
-                primary: "#a8cd9f",
-                secondary: "white",
-              },
-            });
-            localStorage.setItem("token", res.data.accessToken);
-            dispatch(setNewAvatar({ avatar: res.data.avatar }));
-            dispatch(logIn(res.data.accessToken));
-
-            avatarInputRef.current!.value = "";
-          })
-          .catch((error) => {
-            toast.error("Не смогли обновить фото профиля. Попробуйте позже", {
-              style: {
-                backgroundColor: "rgba(65, 67, 112, 0.25)",
-                outline: "2px solid rgba(65, 67, 112, 1)",
-                color: "white",
-                backdropFilter: "blur(5px)",
-              },
-
-              iconTheme: {
-                primary: "#eb4335",
-                secondary: "white",
-              },
-            });
-            console.error(error);
-          });
-      }
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImageSrc(reader.result as string);
+      };
     }
   };
 
-  const changeHeaderHandler = () => {
-    if (
-      headerInputRef &&
-      headerInputRef.current &&
-      headerInputRef.current.files
-    ) {
+  const handleHeaderChange = () => {
+    if (headerInputRef.current?.files) {
+      setImageCropperFormat(21 / 9);
       const file = headerInputRef.current.files[0];
-      if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        api
-          .put("/user/header", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((res) => {
-            toast.success("Шапка профиля изменена", {
-              style: {
-                backgroundColor: "rgba(65, 67, 112, 0.25)",
-                outline: "2px solid rgba(65, 67, 112, 1)",
-                color: "white",
-                backdropFilter: "blur(2px)",
-              },
-
-              iconTheme: {
-                primary: "#a8cd9f",
-                secondary: "white",
-              },
-            });
-            localStorage.setItem("token", res.data.accessToken);
-            dispatch(setNewHeader({ header: res.data.header }));
-            dispatch(logIn(res.data.accessToken));
-
-            headerInputRef.current!.value = "";
-          })
-          .catch((error) => {
-            toast.error("Не смогли обновить шапку профиля. Попробуйте позже", {
-              style: {
-                backgroundColor: "rgba(65, 67, 112, 0.25)",
-                outline: "2px solid rgba(65, 67, 112, 1)",
-                color: "white",
-                backdropFilter: "blur(2px)",
-              },
-
-              iconTheme: {
-                primary: "#eb4335",
-                secondary: "white",
-              },
-            });
-            console.error(error);
-          });
-      }
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImageSrc(reader.result as string);
+      };
     }
+  };
+
+  const handleCropComplete = (file: File) => {
+    if (imageCropperFormat == 1) {
+      changeAvatarHandler(file, dispatch, avatarInputRef);
+    } else {
+      changeHeaderHandler(file, dispatch, headerInputRef);
+    }
+    setImageSrc(null);
   };
 
   return (
     <>
-      <div className={styles.profile}>
+      <div
+        style={imageSrc ? { opacity: 0 } : { opacity: 1 }}
+        className={styles.profile}
+      >
         <div
           className={styles.profile__header_avatar}
           style={
@@ -225,8 +107,9 @@ function Profile(props: Props) {
             name="header"
             id="header"
             hidden
-            onChange={changeHeaderHandler}
+            onChange={handleHeaderChange}
           />
+
           <div
             onClick={() => {
               if (avatarInputRef && avatarInputRef.current) {
@@ -241,14 +124,14 @@ function Profile(props: Props) {
             name="avatar"
             id="avatar"
             hidden
-            onChange={changeAvatarHandler}
+            onChange={handleAvatarChange}
           />
         </div>
 
         <div className={styles.profile__name_cont}>
           <div
             onBlur={() => {
-              changeNameHandler();
+              handleNameChange();
             }}
             onKeyDown={(e) => {
               if (e.code === "Enter") {
@@ -297,6 +180,20 @@ function Profile(props: Props) {
           ВЫЙТИ
         </button>
       </div>
+
+      {imageSrc && (
+        <ImageCropper
+          format={imageCropperFormat}
+          imageSrc={imageSrc}
+          onCropComplete={handleCropComplete}
+          onCancel={() => {
+            setImageSrc(null);
+            avatarInputRef.current!.value = "";
+            headerInputRef.current!.value = "";
+          }}
+        />
+      )}
+
       <Toaster position="bottom-center" />
     </>
   );

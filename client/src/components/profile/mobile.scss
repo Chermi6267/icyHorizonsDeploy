@@ -8,7 +8,7 @@
     $size: 15vh;
 
     &__header_avatar {
-      height: calc(45vh / 2.7);
+      height: calc(85vw * 9 / 21);
       margin-bottom: calc($size / 2);
 
       &::before {
@@ -33,6 +33,10 @@
       height: $size;
       left: 2vh;
       bottom: calc(-0.5 * $size);
+    }
+
+    &__header_input {
+      height: calc(85vw * 9 / 21);
     }
   }
 }

@@ -23,7 +23,7 @@
   &__header_avatar {
     width: 100%;
     background-color: $purple-glass-color;
-    height: calc(45vh / 2.7);
+    height: calc(20vw * 9 / 21);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -128,7 +128,7 @@
 
   &__header_input {
     width: 100%;
-    height: calc(45vh / 2.7);
+    height: calc(20vw * 9 / 21);
     position: absolute;
     transition: background-color ease-in-out 100ms;
     z-index: 99;
