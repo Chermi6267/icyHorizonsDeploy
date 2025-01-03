@@ -13,10 +13,12 @@ interface Props {
   initialLandmarkData: ILandmark[];
   initialAdminCenterData: IAdminCenter;
   categories: ICategory[];
+  hexMapRef: React.RefObject<HTMLDivElement>;
 }
 
 function Catalog(props: Props) {
-  const { initialLandmarkData, initialAdminCenterData, categories } = props;
+  const { initialLandmarkData, initialAdminCenterData, categories, hexMapRef } =
+    props;
   const [isActive, setIsActive] = useState(false);
   const innerWidth = useWindowWidth(1024);
 
@@ -62,15 +64,17 @@ function Catalog(props: Props) {
             selectedRegion: initialAdminCenterData.name,
             categories: categories,
           }}
+          hexMapRef={hexMapRef}
           setIsActive={() => setIsActive(!isActive)}
         />
       </div>
 
       <div className={styles.catalog_wrapper__main_catalog}>
         {innerWidth >= 1023 ? (
-          <SearchMenu data={sortVariables} />
+          <SearchMenu data={sortVariables} hexMapRef={hexMapRef} />
         ) : (
           <SearchAndFiltersMenu
+            hexMapRef={hexMapRef}
             data1={sortVariables}
             data2={{
               selectedRegion: adminCenter,

@@ -367,7 +367,15 @@
   &__name {
     font-size: 1.05rem;
     font-weight: 600;
-    transition: color ease-out 250ms;
+    transition: color 100ms ease-out;
+    color: $text-color;
+
+    @media screen and (hover: hover) {
+      &:hover {
+        color: #9c9ff1;
+        transition: color 100ms ease-out;
+      }
+    }
   }
 }
 
@@ -383,6 +391,14 @@
     height: 11.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 100ms ease-out;
+
+    @media screen and (hover: hover) {
+      &:hover {
+        color: #9c9ff1;
+        transition: color 100ms ease-out;
+      }
+    }
   }
 
   &__slider {

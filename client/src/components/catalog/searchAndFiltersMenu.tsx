@@ -24,10 +24,11 @@ interface Props {
       name: string;
     }[];
   };
+  hexMapRef: React.RefObject<HTMLDivElement>;
 }
 
 function SearchAndFiltersMenu(props: Props) {
-  const { data1, data2 } = props;
+  const { data1, data2, hexMapRef } = props;
   const [isFilterActive, setIsFiltersActive] = useState(false);
   const varFilters = useSelector((state: RootState) => {
     return state.filters.sortVariable;
@@ -85,6 +86,7 @@ function SearchAndFiltersMenu(props: Props) {
       >
         <FiltersMenu
           data={data2}
+          hexMapRef={hexMapRef}
           setIsActive={() => setIsFiltersActive(!isFilterActive)}
         />
 

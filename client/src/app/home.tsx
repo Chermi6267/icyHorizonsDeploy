@@ -9,6 +9,7 @@ import { IAdminCenter, ICategory, ILandmark } from "@/interfaces/landmark";
 import AuthHandler from "@/components/auth/authHandler";
 import Footer from "@/components/footer/footer";
 import Tour from "@/components/tour/tour";
+import { useRef } from "react";
 
 export default function Home(props: {
   landmarks: ILandmark[];
@@ -16,6 +17,7 @@ export default function Home(props: {
   categories: ICategory[];
 }) {
   const { landmarks, adminCenter, categories } = props;
+  const hexMapRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -25,11 +27,13 @@ export default function Home(props: {
         <Tour />
 
         <HexMapMenu
+          hexMapRef={hexMapRef}
           initialLandmarkData={landmarks}
           initialAdminCenterData={adminCenter}
         />
 
         <Catalog
+          hexMapRef={hexMapRef}
           initialLandmarkData={landmarks}
           initialAdminCenterData={adminCenter}
           categories={categories}

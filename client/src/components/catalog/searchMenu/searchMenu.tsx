@@ -15,10 +15,11 @@ interface Props {
       group: "comment" | "rating";
     }[];
   };
+  hexMapRef: React.Ref<HTMLDivElement>;
 }
 
 function SearchMenu(props: Props) {
-  const { data } = props;
+  const { data, hexMapRef } = props;
   const [isSortActive, setIsSortActive] = useState(false);
   const varFilters = useSelector((state: RootState) => {
     return state.filters.sortVariable;

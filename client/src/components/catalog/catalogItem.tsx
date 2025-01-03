@@ -25,26 +25,11 @@ interface Props {
 function CatalogItem(props: Props) {
   const { item } = props;
   const router = useRouter();
-  const itemRef = useRef<HTMLHRElement>(null);
-  const [userAttention, setUserAttention] = useState(true);
-
-  useEffect(() => {
-    if (itemRef && itemRef.current) {
-      itemRef.current.style.color = "#9c9ff1";
-
-      setTimeout(() => {
-        if (itemRef && itemRef.current) {
-          itemRef.current.style.color = "#ffffff";
-        }
-      }, 500);
-    }
-  }, [userAttention]);
 
   return (
     <li className={styles.catalog_item}>
       <div className={styles.catalog_item__name_rating_cont}>
         <h1
-          ref={itemRef}
           className={styles.name_rating_cont__name}
           onClick={() => {
             router.push(`/landmark/${item.id}`);
@@ -71,7 +56,7 @@ function CatalogItem(props: Props) {
         <h2
           className={styles.photo_description_cont__text}
           onClick={() => {
-            setUserAttention(!userAttention);
+            router.push(`/landmark/${item.id}`);
           }}
         >
           {item.description}

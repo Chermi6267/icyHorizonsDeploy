@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { socket } from "@/socket/socket";
 import { useDebounce } from "@/hook/useDebounce";
 import { handleMessage } from "./handleMessage";
@@ -26,13 +26,14 @@ import { useSearchParams } from "next/navigation";
 function HexMapMenu(props: {
   initialLandmarkData: ILandmark[];
   initialAdminCenterData: IAdminCenter;
+  hexMapRef: React.RefObject<HTMLDivElement>;
 }) {
   const selectedRegion = useSelector(
     (state: RootState) => state.hexMap.selectedRegion
   );
   const searchParams = useSearchParams();
   const needRefetch = searchParams.get("needRefetch");
-  const { initialLandmarkData, initialAdminCenterData } = props;
+  const { initialLandmarkData, initialAdminCenterData, hexMapRef } = props;
   const dispatch = useDispatch();
   const [gigaText, setGigaText] = useState("");
   const gigaTextRef = useRef<HTMLDivElement | null>(null);
@@ -140,7 +141,7 @@ function HexMapMenu(props: {
   }, []);
 
   return (
-    <div className={styles.hex_map_menu}>
+    <div ref={hexMapRef} className={styles.hex_map_menu}>
       <div className={styles.slim_data}>
         <SlimData
           regionName={regionData?.adminCenter.name}

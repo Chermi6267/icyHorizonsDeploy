@@ -14,10 +14,11 @@ interface Props {
       name: string;
     }[];
   };
+  hexMapRef: React.RefObject<HTMLDivElement>;
 }
 
 const FiltersMenu: React.FC<Props> = React.memo((props) => {
-  const { data, setIsActive } = props;
+  const { data, setIsActive, hexMapRef } = props;
   const cats = useSelector((state: RootState) => {
     return state.filters.categories;
   });
@@ -62,7 +63,15 @@ const FiltersMenu: React.FC<Props> = React.memo((props) => {
             style={{ "--button_text": `"Изменить"` } as React.CSSProperties}
             onClick={() => {
               setIsActive();
-              window.scrollTo({ behavior: "smooth", top: 0 });
+              setTimeout(() => {
+                if (hexMapRef && hexMapRef.current && window) {
+                  window.scroll({
+                    left: 0,
+                    top: hexMapRef.current.offsetTop - 65,
+                    behavior: "smooth",
+                  });
+                }
+              }, 0);
             }}
           >
             Изменить
