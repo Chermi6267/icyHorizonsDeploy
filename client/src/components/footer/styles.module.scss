@@ -4,14 +4,13 @@
 .footer {
   @include flex-center;
   @include glass-shell;
-  position: absolute;
-  left: -15px;
-  bottom: -15vh;
-  width: calc(100vw + 5px);
+  width: 100%;
   border-radius: 0;
   outline: none;
   height: max-content;
   flex-direction: row-reverse;
+  margin-top: 20vh;
+  border-top: 2px solid $purple-active-color;
 
   p {
     width: 80%;

@@ -11,10 +11,7 @@ function Footer(props: Props) {
 
   return (
     <footer className={styles.footer}>
-      <p>
-        Designed by Виктор Черников and Максим Ким. <br></br>Все права защищены
-        ©.
-      </p>
+      <p>Designed by Victor Chernikov and Maksim Kim.</p>
       <button
         onClick={() => {
           router.push("/about");

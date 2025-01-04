@@ -20,8 +20,8 @@ function Page(props: Props) {
 
   return (
     <>
+      <HeaderComponent />
       <main className={styles.main}>
-        <HeaderComponent />
         {clientCondition ? (
           <Profile user={user} />
         ) : (

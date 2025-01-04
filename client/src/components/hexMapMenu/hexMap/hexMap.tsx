@@ -15,13 +15,11 @@ function HexMap(props: Props) {
   const variants = {
     hidden: {
       scale: 1.0,
-      opacity: 0.95,
       cursor: isGigaFetching ? "not-allowed" : "pointer",
     },
 
     animate: {
       scale: 1.2,
-      opacity: 1,
       cursor: isGigaFetching ? "not-allowed" : "pointer",
     },
   };
@@ -52,7 +50,7 @@ function HexMap(props: Props) {
         xmlns="http://www.w3.org/2000/svg"
       >
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_1"]}
           regionName="LEN"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -68,7 +66,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_1"]}
           regionName="SNT"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -84,7 +82,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="OLN"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -100,7 +98,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="TMP"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -116,7 +114,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="UMA"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -132,7 +130,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_5"]}
           regionName="NKU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -148,7 +146,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="OYK"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -164,7 +162,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_4"]}
           regionName="SKU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -180,7 +178,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="NYR"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -196,7 +194,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="EVB"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -212,7 +210,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_4"]}
           regionName="VKU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -227,7 +225,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_4"]}
           regionName="ABU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -243,7 +241,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_1"]}
           regionName="MIR"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -259,7 +257,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_4"]}
           regionName="ALH"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -275,7 +273,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="VYU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -291,7 +289,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_4"]}
           regionName="UYA"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -307,7 +305,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="UAL"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -322,7 +320,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_1"]}
           regionName="OLK"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -338,7 +336,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="BUL"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -354,7 +352,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_0"]}
           regionName="NER"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -370,7 +368,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="ANB"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -386,7 +384,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="YKT"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -394,14 +392,14 @@ function HexMap(props: Props) {
         >
           <path
             xmlns="http://www.w3.org/2000/svg"
-            fill="#58A399"
-            stroke="#E2F4C5"
+            fill="#7653c8"
+            stroke="#9c9ff1"
             strokeWidth="2"
             d="M320 448.5a1.5 1.5 0 0 0-1.064-1.436A1.5 1.5 0 0 0 317.5 446h-.5v-4.5c0-.384-.144-.735-.382-1 .129-.144.231-.314.297-.5h2.17a1.5 1.5 0 0 0 1.415 1h.585a1.5 1.5 0 0 0 1.415 1h4a1.5 1.5 0 0 0 1.415-1h.585a1.5 1.5 0 0 0 1.415-1H330v.5a.5.5 0 0 1-.5.5h-.5a2 2 0 0 0-2 2v.085a1.5 1.5 0 0 0-1 1.415v.585a1.5 1.5 0 0 0 .064 2.851 1.5 1.5 0 0 0 1.936.979v.17a1.5 1.5 0 0 0-1 1.415v.5h-1.085a1.507 1.507 0 0 0-.979-.936A1.5 1.5 0 0 0 323.5 449H320v-.5Z"
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_1"]}
           regionName="ALU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -417,7 +415,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="AMG"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -433,7 +431,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="VVU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -449,7 +447,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="GRN"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -465,7 +463,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="HNG"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -481,7 +479,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="MKU"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -496,7 +494,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="CHP"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -511,7 +509,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_4"]}
           regionName="MOM"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -527,7 +525,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="TTT"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -542,7 +540,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="NAM"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -557,7 +555,7 @@ function HexMap(props: Props) {
           />
         </RegionSvgPath>
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="ZHG"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -574,7 +572,7 @@ function HexMap(props: Props) {
         </RegionSvgPath>
 
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_3"]}
           regionName="KBY"
           setRegion={onClick}
           selectedRegion={selectedRegion}
@@ -591,7 +589,7 @@ function HexMap(props: Props) {
         </RegionSvgPath>
 
         <RegionSvgPath
-          className={styles.hex_map__region_path}
+          className={styles["hex_map__region_path-animate_2"]}
           regionName="VIL"
           setRegion={onClick}
           selectedRegion={selectedRegion}

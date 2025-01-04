@@ -2,8 +2,7 @@
 
 import { io } from "socket.io-client";
 
-export const socket = io(`wss://chermi6267.ru`, {
-    path: "/my_api/socket.io",
-    transports: ["websocket"],
+export const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`, {
+  path: `${process.env.NEXT_PUBLIC_SOCKET_PATH}`,
+  transports: ["websocket"],
 });
-

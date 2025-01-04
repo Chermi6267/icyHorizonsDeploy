@@ -67,7 +67,7 @@ const FiltersMenu: React.FC<Props> = React.memo((props) => {
                 if (hexMapRef && hexMapRef.current && window) {
                   window.scroll({
                     left: 0,
-                    top: hexMapRef.current.offsetTop - 65,
+                    top: 0,
                     behavior: "smooth",
                   });
                 }

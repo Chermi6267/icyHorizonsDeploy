@@ -252,6 +252,18 @@
   }
 }
 
+@keyframes reg-opacity {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .hex_map {
   overflow: visible;
   width: 96%;
@@ -260,6 +272,16 @@
   &__region_path {
     outline: none;
     pointer-events: visiblePainted;
+    opacity: 0;
+
+    @for $i from 0 through 5 {
+      &-animate_#{$i} {
+        @extend .hex_map__region_path;
+        animation: reg-opacity 150ms ease-in-out 1;
+        animation-delay: 100ms * $i;
+        animation-fill-mode: both;
+      }
+    }
 
     &-active {
       fill: $purple-active-color;

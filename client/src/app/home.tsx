@@ -24,13 +24,13 @@ export default function Home(props: {
       <AuthHandler />
       <Header />
       <main className={styles.main}>
-        <Tour />
-
         <HexMapMenu
           hexMapRef={hexMapRef}
           initialLandmarkData={landmarks}
           initialAdminCenterData={adminCenter}
         />
+
+        <Tour />
 
         <Catalog
           hexMapRef={hexMapRef}
