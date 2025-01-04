@@ -8,7 +8,7 @@ const app = express();
 const secret = process.env.WEB_HOOK_SECRET!;
 app.use(express.json());
 
-app.post("/webhook", (req, res) => {
+app.post("/", (req, res) => {
   const signature = `sha256=${crypto
     .createHmac("sha256", secret)
     .update(JSON.stringify(req.body))
