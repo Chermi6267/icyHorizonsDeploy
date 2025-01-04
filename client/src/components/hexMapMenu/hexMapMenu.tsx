@@ -22,6 +22,7 @@ import { sortByCommentsLength } from "@/utils/sortByCommentsLength";
 import api from "@/http/api";
 import useWindowWidth from "@/hook/useWindowWidth";
 import { useSearchParams } from "next/navigation";
+import { setAdminCenter } from "@/store/adminSlice";
 
 function HexMapMenu(props: {
   initialLandmarkData: ILandmark[];
@@ -104,6 +105,8 @@ function HexMapMenu(props: {
         setLandmarks(sortByCommentsLength(regionData.landmarks, varFilter.type))
       );
     }
+
+    dispatch(setAdminCenter(regionData.adminCenter));
   }, [regionData, varFilter, dispatch]);
 
   // ================================

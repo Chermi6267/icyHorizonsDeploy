@@ -61,7 +61,7 @@ function Catalog(props: Props) {
       <div className={styles.catalog_wrapper__filters_menu}>
         <FiltersMenu
           data={{
-            selectedRegion: initialAdminCenterData.name,
+            selectedRegion: adminCenter,
             categories: categories,
           }}
           hexMapRef={hexMapRef}
