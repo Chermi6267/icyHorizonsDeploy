@@ -85,10 +85,14 @@ function Profile({ user }: Props) {
           style={
             {
               backgroundImage: `url(${
-                user.header === "" ? "/userHeader.png" : user.header
+                user.header === "" || user.header === null
+                  ? "/userHeader.png"
+                  : user.header
               })`,
               "--avatar-url": `url(${
-                user.avatar === "" ? "/userAvatar.png" : user.avatar
+                user.avatar === "" || user.avatar === null
+                  ? "/user.png"
+                  : user.avatar
               })`,
             } as React.CSSProperties
           }

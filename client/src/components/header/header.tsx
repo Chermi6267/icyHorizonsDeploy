@@ -79,7 +79,7 @@ function Header(props: Props) {
               src={
                 clientCondition
                   ? user.avatar === "" || user.avatar === null
-                    ? "/userAvatar.png"
+                    ? "/user.png"
                     : user.avatar
                   : "/user.png"
               }

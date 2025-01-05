@@ -120,6 +120,15 @@
 
     @media (hover: hover) {
       &:hover {
+        &::before {
+          content: "Изменить";
+          position: absolute;
+          top: 55%;
+          left: 50%;
+          font-size: small;
+          transform: translate(-50%, -50%);
+        }
+
         background-color: rgba(34, 34, 34, 0.5);
         transition: background-color ease-in-out 100ms;
       }
@@ -135,6 +144,14 @@
 
     @media (hover: hover) {
       &:hover {
+        &::before {
+          content: "Изменить";
+          position: absolute;
+          top: 55%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
         background-color: rgba(34, 34, 34, 0.5);
         transition: background-color ease-in-out 100ms;
       }
