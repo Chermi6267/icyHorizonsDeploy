@@ -1,7 +1,7 @@
 @import "../../../scss/variables.scss";
 @import "../../../scss/mixins.scss";
 @import "../../page.module.scss";
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+@import "leaflet/dist/leaflet.css";
 
 .main {
   row-gap: 7vh;
@@ -65,7 +65,7 @@
   outline: none;
   background-color: transparent;
   color: $text-color;
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--comfortaa);
 }
 
 .comment_cont {
@@ -95,7 +95,7 @@
     resize: none;
     color: $light-purple-color;
     font-size: 1rem;
-    font-family: "Comfortaa", sans-serif;
+    font-family: var(--comfortaa);
     font-optical-sizing: auto;
     font-style: normal;
     border: none;
@@ -144,7 +144,7 @@
     padding: max(10px, 1vw);
     margin-top: max(5px, 2vh);
     border-radius: 15px;
-    font-family: "Comfortaa", sans-serif;
+    font-family: var(--comfortaa);
     font-size: 1rem;
   }
 }

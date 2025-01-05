@@ -14,6 +14,7 @@ import Star from "@/components/svg/star";
 import StarRating from "@/components/landmark/starRating";
 import { Toaster } from "react-hot-toast";
 import Image from "next/image";
+import Map from "@/components/map/map";
 
 interface Props {
   setNeedRefetch: (v: boolean) => void;
@@ -56,6 +57,14 @@ function LandmarkContent(props: Props) {
           </div>
 
           <NameRating landmarkData={landmarkData} />
+
+          <Map
+            cords={[
+              parseFloat(landmarkData.latitude),
+              parseFloat(landmarkData.longitude),
+            ]}
+            name={landmarkData.name}
+          />
 
           <div className={styles.landmark_main__comment_cont}>
             <div className={styles.comment_cont__comment_input}>
@@ -125,7 +134,7 @@ function LandmarkContent(props: Props) {
                               src={
                                 comment.user.profile.avatar === null ||
                                 comment.user.profile.avatar === ""
-                                  ? "/userAvatar.png"
+                                  ? "/user.png"
                                   : comment.user.profile.avatar
                               }
                               alt="User Avatar"

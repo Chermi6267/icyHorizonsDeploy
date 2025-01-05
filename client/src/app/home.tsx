@@ -2,7 +2,7 @@
 
 import HexMapMenu from "@/components/hexMapMenu/hexMapMenu";
 import styles from "./page.module.scss";
-import "./globals.scss";
+import "./globals.css";
 import Header from "@/components/header/header";
 import Catalog from "@/components/catalog/catalog";
 import { IAdminCenter, ICategory, ILandmark } from "@/interfaces/landmark";

@@ -135,3 +135,15 @@ table {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+.leaflet-control-zoom {
+  .leaflet-bar {
+    .leaflet-control {
+      background-color: rgb(0, 136, 255);
+    }
+  }
+}
+
+.leaflet-control-zoom-out {
+  background-color: aqua;
+}
