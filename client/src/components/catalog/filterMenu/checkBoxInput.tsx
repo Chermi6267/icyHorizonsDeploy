@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 import { v4 as uuidv4 } from "uuid";
 
 interface Props {

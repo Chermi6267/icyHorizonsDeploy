@@ -1,5 +1,5 @@
-import Arrow from "../svg/arrow";
-import styles from "./styles.module.scss";
+import Arrow from "../../svg/arrow";
+import styles from "../styles.module.scss";
 
 interface Props {
   buttonText: string;

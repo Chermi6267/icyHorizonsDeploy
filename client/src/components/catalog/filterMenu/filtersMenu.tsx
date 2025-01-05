@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import CheckBoxInput from "../checkBoxInput";
+import CheckBoxInput from "./checkBoxInput";
 import styles from "../styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategoryFilter } from "@/store/filtersSlice";
@@ -70,6 +70,20 @@ const FiltersMenu: React.FC<Props> = React.memo((props) => {
                     top: 0,
                     behavior: "smooth",
                   });
+
+                  hexMapRef.current.style.outlineColor = "#7653c8";
+                  (
+                    hexMapRef.current.children[1] as HTMLElement
+                  ).style.outlineColor = "#7653c8";
+
+                  setTimeout(() => {
+                    if (hexMapRef && hexMapRef.current) {
+                      hexMapRef.current.style.outlineColor = "#414370";
+                      (
+                        hexMapRef.current.children[1] as HTMLElement
+                      ).style.outlineColor = "#414370";
+                    }
+                  }, 1000);
                 }
               }, 0);
             }}

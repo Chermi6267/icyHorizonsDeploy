@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CatalogItems from "./catalogItems";
 import FiltersMenu from "./filterMenu/filtersMenu";
-import SearchAndFiltersMenu from "./searchAndFiltersMenu";
+import SearchAndFiltersMenu from "./filterMenu/searchAndFiltersMenu";
 import SearchMenu from "./searchMenu/searchMenu";
 import styles from "./styles.module.scss";
 import { IAdminCenter, ICategory, ILandmark } from "@/interfaces/landmark";

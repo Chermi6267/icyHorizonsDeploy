@@ -14,6 +14,7 @@
     @include glass-shell;
     @include flex-center;
     position: relative;
+    transition: outline-color outline-width ease-in 700ms;
   }
 
   &__info_container {
@@ -272,14 +273,14 @@
   &__region_path {
     outline: none;
     pointer-events: visiblePainted;
-    opacity: 0;
+    opacity: 1;
 
     @for $i from 0 through 5 {
       &-animate_#{$i} {
         @extend .hex_map__region_path;
         animation: reg-opacity 150ms ease-in-out 1;
         animation-delay: 100ms * $i;
-        animation-fill-mode: both;
+        animation-fill-mode: backwards;
       }
     }
 

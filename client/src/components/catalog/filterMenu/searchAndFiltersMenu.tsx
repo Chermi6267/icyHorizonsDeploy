@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import CheckBoxInput from "./checkBoxInput";
-import FiltersMenu from "./filterMenu/filtersMenu";
+import FiltersMenu from "./filtersMenu";
 import FiltersButton from "./filtersButton";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 import { RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
 import { setSortVariableFilter } from "@/store/filtersSlice";
