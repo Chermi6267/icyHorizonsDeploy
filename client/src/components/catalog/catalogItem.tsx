@@ -3,6 +3,7 @@ import Slider from "../slider/slider";
 import Star from "../svg/star";
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   item: {
@@ -29,14 +30,10 @@ function CatalogItem(props: Props) {
   return (
     <li className={styles.catalog_item}>
       <div className={styles.catalog_item__name_rating_cont}>
-        <h1
-          className={styles.name_rating_cont__name}
-          onClick={() => {
-            router.push(`/landmark/${item.id}`);
-          }}
-        >
-          {item.name}
-        </h1>
+        <Link href={`/landmark/${item.id}`}>
+          <h1 className={styles.name_rating_cont__name}>{item.name}</h1>
+        </Link>
+
         <div className={styles.name_rating_cont__rating}>
           <p className={styles.rating__text}>
             {String(parseFloat(item.rating).toFixed(1)).split(".")[1] === "0"
@@ -53,13 +50,8 @@ function CatalogItem(props: Props) {
           className={styles.photo_description_cont__slider}
         />
 
-        <h2
-          className={styles.photo_description_cont__text}
-          onClick={() => {
-            router.push(`/landmark/${item.id}`);
-          }}
-        >
-          {item.description}
+        <h2 className={styles.photo_description_cont__text}>
+          <Link href={`/landmark/${item.id}`}>{item.description}</Link>
         </h2>
       </div>
     </li>

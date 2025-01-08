@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Slider from "../slider/slider";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 interface Props {}
 
@@ -29,14 +30,9 @@ function Tour(props: Props) {
         эндуро, 4x4 и квадроциклах. Эксклюзивная рыбалка
       </h3>
 
-      <button
-        onClick={() => {
-          router.push("https://sakhasled.com/");
-        }}
-        className={styles.tour__btn}
-      >
-        Вперед
-      </button>
+      <Link href={"https://sakhasled.com/"}>
+        <button className={styles.tour__btn}>Вперед</button>
+      </Link>
     </div>
   );
 }

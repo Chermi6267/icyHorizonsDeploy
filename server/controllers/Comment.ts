@@ -60,6 +60,13 @@ export class CommentController {
         return res.status(403).json({ message: "Не авторизован" });
       }
 
+      if (!JSON.parse(process.env.IS_COMMENT!)) {
+        console.log("Комментарии выключены");
+        return res
+          .status(423)
+          .json({ message: "Админ сервера отключил данную функцию :)" });
+      }
+
       const comment = await commentService.createComment({
         text,
         stars,

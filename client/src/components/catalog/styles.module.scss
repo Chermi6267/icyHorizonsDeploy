@@ -369,11 +369,13 @@
     font-weight: 600;
     transition: color 100ms ease-out;
     color: $text-color;
+    text-decoration: none;
 
     @media screen and (hover: hover) {
       &:hover {
         color: #9c9ff1;
         transition: color 100ms ease-out;
+        text-decoration: none;
       }
     }
   }
@@ -398,6 +400,11 @@
         color: #9c9ff1;
         transition: color 100ms ease-out;
       }
+    }
+
+    a {
+      color: $text-color;
+      @extend .photo_description_cont__text;
     }
   }
 

@@ -25,15 +25,15 @@ function Overlay(props: Props) {
           }`}
         >
           <div className={styles.greetings_container__text_container}>
-            <h1>Давно не виделись, Дружище!</h1>
-            <p>Возвращайся, нажав здесь</p>
+            <h1>Привет, друг!</h1>
+            <p>Зарегистрируйся, нажав здесь</p>
           </div>
 
           <button
             onClick={() => setIsRegForm(true)}
             className={styles.greetings_container__btn}
           >
-            Вход
+            Регистрация
           </button>
         </div>
 
@@ -43,15 +43,15 @@ function Overlay(props: Props) {
           }`}
         >
           <div className={styles.greetings_container__text_container}>
-            <h1>Привет, друг!</h1>
-            <p>Зарегистрируйся, нажав здесь</p>
+            <h1>Давно не виделись, Дружище!</h1>
+            <p>Возвращайся, нажав здесь</p>
           </div>
 
           <button
             onClick={() => setIsRegForm(false)}
             className={styles.greetings_container__btn}
           >
-            Регистрация
+            Вход
           </button>
         </div>
       </div>

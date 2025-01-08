@@ -11,6 +11,7 @@ import { unsetUser } from "@/store/userSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import AuthHandler from "../auth/authHandler";
+import Link from "next/link";
 
 interface Props {}
 
@@ -69,73 +70,72 @@ function Header(props: Props) {
           >
             О нас
           </button> */}
-          <div
-            className={styles.buttons_container__user}
-            onClick={() => {
-              clientCondition ? router.push("/profile") : router.push("/auth");
-            }}
-          >
-            <Image
-              src={
-                clientCondition
-                  ? user.avatar === "" || user.avatar === null
-                    ? "/user.png"
-                    : user.avatar
-                  : "/user.png"
-              }
-              alt="User"
-              fill
-              sizes="width: 100%; height: 100%"
-              className={`${styles.user__img} ${
-                clientCondition ? styles["user__img-auth"] : ""
-              }`}
-            />
-
-            <button className={styles.user__show_btn} />
-
-            <div
-              className={
-                isUserMenu
-                  ? styles.user__info_wrapper
-                  : styles["user__info_wrapper-hidden"]
-              }
-            >
-              <div className={styles.info_wrapper__container}>
-                <p className={styles.container__text}>
-                  {clientCondition ? user.email : "Вы не авторизованы"}
-                </p>
-              </div>
-            </div>
-
-            <div
-              className={
-                isUserMenu
-                  ? styles["user__info_wrapper-logout"]
-                  : styles["user__info_wrapper-logout-hidden"]
-              }
-            >
-              <div
-                className={styles.info_wrapper__container}
-                style={
-                  !clientCondition ? { color: "#a8cd9f" } : { color: "#eb4335" }
+          <Link href={clientCondition ? "/profile" : "/auth"}>
+            <div className={styles.buttons_container__user}>
+              <Image
+                src={
+                  clientCondition
+                    ? user.avatar === "" || user.avatar === null
+                      ? "/user.png"
+                      : user.avatar
+                    : "/user.png"
                 }
-                onClick={() => {
-                  if (clientCondition) {
-                    logoutHandler();
-                    dispatch(unsetUser());
-                    dispatch(logOut());
-                    localStorage.removeItem("token");
-                  } else {
-                    router.push("/auth");
-                  }
-                }}
+                alt="User"
+                fill
+                sizes="width: 100%; height: 100%"
+                className={`${styles.user__img} ${
+                  clientCondition ? styles["user__img-auth"] : ""
+                }`}
+              />
+
+              <button className={styles.user__show_btn} />
+
+              <div
+                className={
+                  isUserMenu
+                    ? styles.user__info_wrapper
+                    : styles["user__info_wrapper-hidden"]
+                }
               >
-                <p className={styles.container__logout_text}>
-                  {clientCondition ? "Выйти" : "Войти"}
-                </p>
+                <div className={styles.info_wrapper__container}>
+                  <p className={styles.container__text}>
+                    {clientCondition ? user.email : "Вы не авторизованы"}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className={
+                  isUserMenu
+                    ? styles["user__info_wrapper-logout"]
+                    : styles["user__info_wrapper-logout-hidden"]
+                }
+              >
+                <div
+                  className={styles.info_wrapper__container}
+                  style={
+                    !clientCondition
+                      ? { color: "#a8cd9f" }
+                      : { color: "#eb4335" }
+                  }
+                  onClick={() => {
+                    if (clientCondition) {
+                      logoutHandler();
+                      dispatch(unsetUser());
+                      dispatch(logOut());
+                      localStorage.removeItem("token");
+                    } else {
+                      router.push("/auth");
+                    }
+                  }}
+                >
+                  <p className={styles.container__logout_text}>
+                    {clientCondition ? "Выйти" : "Войти"}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </header>
     </>
