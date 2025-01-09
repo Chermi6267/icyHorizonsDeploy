@@ -11,36 +11,41 @@ export const changeNameHandler = (
   dispatch: AppDispatch
 ) => {
   if (name !== currentName) {
-    api
-      .put("/user/name", { name })
-      .then((res) => {
-        toast.success("Имя пользователя изменено", {
-          style: {
-            backgroundColor: "rgba(65, 67, 112, 0.25)",
-            outline: "2px solid rgba(65, 67, 112, 1)",
-            color: "white",
-            backdropFilter: "blur(2px)",
-          },
-          iconTheme: { primary: "#a8cd9f", secondary: "white" },
+    if (name.length > 40 || name === "") {
+      alert("Нет");
+      return;
+    } else {
+      api
+        .put("/user/name", { name })
+        .then((res) => {
+          toast.success("Имя пользователя изменено", {
+            style: {
+              backgroundColor: "rgba(65, 67, 112, 0.25)",
+              outline: "2px solid rgba(65, 67, 112, 1)",
+              color: "white",
+              backdropFilter: "blur(2px)",
+            },
+            iconTheme: { primary: "#a8cd9f", secondary: "white" },
+          });
+          localStorage.setItem("token", res.data.accessToken);
+          dispatch(setNewName({ name: res.data.newName }));
+          dispatch(logIn(res.data.accessToken));
+        })
+        .catch((error) => {
+          if (nameRef && nameRef.current) {
+            nameRef.current.innerHTML = currentName || "";
+          }
+          toast.error(error.response.data.message, {
+            style: {
+              backgroundColor: "rgba(65, 67, 112, 0.25)",
+              outline: "2px solid rgba(65, 67, 112, 1)",
+              color: "white",
+              backdropFilter: "blur(5px)",
+            },
+            iconTheme: { primary: "#eb4335", secondary: "white" },
+          });
+          console.error(error);
         });
-        localStorage.setItem("token", res.data.accessToken);
-        dispatch(setNewName({ name: res.data.newName }));
-        dispatch(logIn(res.data.accessToken));
-      })
-      .catch((error) => {
-        if (nameRef && nameRef.current) {
-          nameRef.current.innerHTML = currentName || "";
-        }
-        toast.error(error.response.data.message, {
-          style: {
-            backgroundColor: "rgba(65, 67, 112, 0.25)",
-            outline: "2px solid rgba(65, 67, 112, 1)",
-            color: "white",
-            backdropFilter: "blur(5px)",
-          },
-          iconTheme: { primary: "#eb4335", secondary: "white" },
-        });
-        console.error(error);
-      });
+    }
   }
 };

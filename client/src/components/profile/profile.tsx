@@ -33,7 +33,7 @@ function Profile({ user }: Props) {
   const handleNameChange = () => {
     if (nameRef.current) {
       changeNameHandler(
-        nameRef.current.innerText,
+        nameRef.current.innerText.trim(),
         user.name,
         nameRef,
         dispatch
@@ -138,7 +138,7 @@ function Profile({ user }: Props) {
               handleNameChange();
             }}
             onKeyDown={(e) => {
-              if (e.code === "Enter") {
+              if (e.code === "Enter" || e.key === "Enter") {
                 e.preventDefault();
                 if (nameRef && nameRef.current) {
                   nameRef.current.blur();

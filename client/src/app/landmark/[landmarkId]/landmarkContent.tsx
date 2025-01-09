@@ -85,8 +85,16 @@ function LandmarkContent(props: Props) {
                 }
                 className={styles.comment_input__input_field}
                 contentEditable
+                spellCheck="false"
                 onInput={(e) => {
-                  setCommentText(e.currentTarget.innerText);
+                  if (e.currentTarget.innerText.trim().length > 200) {
+                    // Защита от дурака
+                    alert("Слишком большой");
+                    if (commentRef && commentRef.current) {
+                      commentRef.current.innerText = "";
+                    }
+                  }
+                  setCommentText(e.currentTarget.innerText.trim());
                 }}
                 ref={commentRef}
               />

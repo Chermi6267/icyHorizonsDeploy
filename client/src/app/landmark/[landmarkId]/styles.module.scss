@@ -179,6 +179,7 @@
     width: max-content;
     width: calc(100% - max(15px, 1vw) - max(15px, 1vw));
     padding: 0 max(15px, 1vw);
+    word-wrap: break-word;
   }
 }
 

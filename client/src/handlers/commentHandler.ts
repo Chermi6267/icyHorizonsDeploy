@@ -17,7 +17,7 @@ export const commentHandler = async (
     e.preventDefault();
 
     if (isAuth) {
-      if (commentText === "") {
+      if (commentText.trim() === "") {
         toast("Заполните поле отзыва", {
           id: "1",
           style: {
