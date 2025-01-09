@@ -177,8 +177,8 @@
   &__text {
     margin: 0;
     width: max-content;
-    width: calc(100% - 1vw);
-    padding-left: max(15px, 1vw);
+    width: calc(100% - max(15px, 1vw) - max(15px, 1vw));
+    padding: 0 max(15px, 1vw);
   }
 }
 

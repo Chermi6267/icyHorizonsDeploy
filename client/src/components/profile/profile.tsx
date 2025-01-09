@@ -26,14 +26,14 @@ function Profile({ user }: Props) {
 
   useEffect(() => {
     if (nameRef.current) {
-      nameRef.current.innerHTML = user.name || "Ваше имя";
+      nameRef.current.innerText = user.name || "Ваше имя";
     }
   }, [user]);
 
   const handleNameChange = () => {
     if (nameRef.current) {
       changeNameHandler(
-        nameRef.current.innerHTML,
+        nameRef.current.innerText,
         user.name,
         nameRef,
         dispatch
