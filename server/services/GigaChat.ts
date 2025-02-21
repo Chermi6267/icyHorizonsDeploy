@@ -25,6 +25,14 @@ export class GigaChatService {
       if (adminCenterId === null) {
         socket.send("Административный центр не найден");
         return;
+      } else {
+        if (adminCenterId !== "ALL") {
+          await landmarkRepository.updateTouristFlow(adminCenterId).then(() => {
+            console.warn(
+              `☑  Запись для ${adminCenterId} обновлена успешно (TouristFlow)`
+            );
+          });
+        }
       }
 
       await client.createToken();
@@ -87,7 +95,6 @@ export class GigaChatService {
     } catch (error) {
       console.error("Ошибка при обработке запроса:", error);
       socket.send("==ERROR==");
-      socket.disconnect();
       return;
     }
   }

@@ -28,28 +28,25 @@ function AuthPage(props: Props) {
         "Ошибка авторизации. Убедитесь, что почта не используется с паролем.",
         {
           id: "1",
-
           style: {
             backgroundColor: "rgba(65, 67, 112, 0.25)",
             outline: "2px solid rgba(65, 67, 112, 1)",
             color: "white",
             backdropFilter: "blur(5px)",
           },
-
           iconTheme: {
             primary: "#eb4335",
             secondary: "white",
           },
         }
       );
-
       setCustomError(null);
       router.replace("/auth");
     }
 
     if (status) {
       toast.promise(
-        getAccessTokenHandler().then(() => router.push("/")),
+        getAccessTokenHandler().then(() => router.push("/profile")),
         {
           loading: "Перенаправление",
           success: "ОК",
@@ -57,28 +54,24 @@ function AuthPage(props: Props) {
         },
         {
           id: "2",
-
           style: {
             backgroundColor: "rgba(65, 67, 112, 0.25)",
             outline: "2px solid rgba(65, 67, 112, 1)",
             color: "white",
             backdropFilter: "blur(2px)",
           },
-
           error: {
             iconTheme: {
               primary: "#eb4335",
               secondary: "white",
             },
           },
-
           iconTheme: {
             primary: "#a8cd9f",
             secondary: "white",
           },
         }
       );
-
       setStatus(null);
       router.replace("/auth");
     }
@@ -87,7 +80,6 @@ function AuthPage(props: Props) {
   return (
     <main className={styles.main}>
       <AuthMenu />
-
       <Toaster position="bottom-center" />
     </main>
   );

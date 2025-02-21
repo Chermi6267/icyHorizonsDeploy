@@ -21,7 +21,7 @@ const pixelifySans = Pixelify_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Icy Horizons",
+  title: "Icy Horizons | Главная",
   description:
     "Icy Horizons это сайт для знакомства пользователя любого уровня с безграничной красотой природы и культуры Республики Саха Якутия",
 };

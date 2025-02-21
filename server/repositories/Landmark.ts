@@ -2,6 +2,78 @@ import prisma from "./prismaClient";
 import { ILandmark, IUpdateLandmark } from "../interfaces/Landmark";
 
 export class LandmarkRepository {
+  async createTouristFlow(adminCenterId: string) {
+    try {
+      const date = new Date();
+      const result = await prisma.touristFlow.findFirst({
+        where: {
+          adminCenterId: adminCenterId,
+          month: date.getMonth(),
+          year: date.getFullYear(),
+        },
+      });
+
+      if (result === null) {
+        await prisma.touristFlow
+          .create({
+            data: {
+              views: 0,
+              commentCount: 0,
+              adminCenterId: adminCenterId,
+              month: date.getMonth(),
+              year: date.getFullYear(),
+            },
+          })
+          .then(() => {
+            console.log(
+              `✅ Новая запись для ${adminCenterId} создана успешно (TouristFlow)`
+            );
+          });
+      }
+
+      return;
+    } catch (error) {
+      throw new Error(`Repository: ${error}`);
+    }
+  }
+
+  async updateTouristFlow(adminCenterId: string) {
+    try {
+      const result = await prisma.touristFlow.findFirst({
+        where: { adminCenterId: adminCenterId },
+        orderBy: [{ year: "asc" }, { month: "asc" }],
+      });
+
+      const date = new Date();
+
+      if (result === null) {
+        await prisma.touristFlow.create({
+          data: {
+            views: 1,
+            commentCount: 0,
+            adminCenterId: adminCenterId,
+            month: date.getMonth(),
+            year: date.getFullYear(),
+          },
+        });
+      } else {
+        await prisma.touristFlow.update({
+          where: {
+            id: result.id,
+            adminCenterId: adminCenterId,
+          },
+          data: {
+            views: result.views + 1,
+          },
+        });
+      }
+
+      return;
+    } catch (error) {
+      throw new Error(`Repository: ${error}`);
+    }
+  }
+
   async getAllLandmarks(page?: number, limit?: number) {
     try {
       const skip = page && limit ? (page - 1) * limit : undefined;
@@ -151,7 +223,7 @@ export class LandmarkRepository {
               id: true,
               user: {
                 select: {
-                  email: true,
+                  email: false,
                   profile: {
                     select: {
                       name: true,

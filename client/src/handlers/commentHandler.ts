@@ -11,9 +11,10 @@ export const commentHandler = async (
   setNeedRefetch: (v: boolean) => void,
   setCommentText: React.Dispatch<React.SetStateAction<string>>,
   commentRef: React.RefObject<HTMLDivElement>,
-  isAuth: boolean
+  isAuth: boolean,
+  windowWidth: number
 ) => {
-  if ((e.key === "Enter" && !e.shiftKey && window.innerWidth > 768) || isBtn) {
+  if ((e.key === "Enter" && !e.shiftKey && windowWidth > 768) || isBtn) {
     e.preventDefault();
 
     if (isAuth) {
@@ -57,7 +58,13 @@ export const commentHandler = async (
 
         refetch();
         setNeedRefetch(true);
-        await fetch("/landmark", { method: "POST" });
+        await fetch("/landmark", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ landmarkId }),
+        });
       } catch (error) {
         toast.error("Что-то пошло не так", {
           id: "1",

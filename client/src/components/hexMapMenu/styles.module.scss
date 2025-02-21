@@ -236,6 +236,12 @@
 }
 
 .right {
+  &__landmark_name {
+    max-width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+
   &__rating {
     @include flex-center;
     justify-content: flex-start;

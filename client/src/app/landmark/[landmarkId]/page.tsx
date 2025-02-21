@@ -1,46 +1,35 @@
-"use client";
+import { Metadata } from "next";
+import LandmarkContent from "./landmarkContent";
 
-import styles from "./styles.module.scss";
-import Header from "@/components/header/header";
-import { Suspense, useState } from "react";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import AuthHandler from "@/components/auth/authHandler";
-import Arrow from "@/components/svg/arrow";
-import Footer from "@/components/footer/footer";
-
-const LandmarkContent = dynamic(() => import("./landmarkContent"), {
-  ssr: false,
-});
-
-function LandmarkPage() {
-  const [needRefetch, setNeedRefetch] = useState(false);
-
-  return (
-    <>
-      <AuthHandler />
-      <Header />
-
-      <main className={styles.main}>
-        <Link
-          href={`/?needRefetch=${needRefetch}`}
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          <button className={styles.empty_btn}>
-            <div className={styles.back_arrow}>
-              <Arrow className={styles.back_arrow__svg} />
-              <p className={styles.back_arrow__text}>Назад</p>
-            </div>
-          </button>
-        </Link>
-
-        <Suspense>
-          <LandmarkContent setNeedRefetch={(v: boolean) => setNeedRefetch(v)} />
-        </Suspense>
-      </main>
-      <Footer />
-    </>
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { landmarkId: string };
+}): Promise<Metadata> => {
+  const landmarkResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/landmark/id/${params.landmarkId}`
   );
-}
+  const landmark = await landmarkResponse.json();
+
+  return {
+    title: `Icy Horizons | ${landmark.name}`,
+    description: `${landmark.description}`,
+  };
+};
+
+const LandmarkPage = async ({ params }: { params: { landmarkId: string } }) => {
+  const landmarkResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/landmark/id/${params.landmarkId}`,
+    {
+      next: {
+        revalidate: 60 * 30,
+        tags: [`landmark${params.landmarkId}`],
+      },
+    }
+  );
+  const landmark = await landmarkResponse.json();
+
+  return <LandmarkContent initialLandmarkData={landmark} />;
+};
 
 export default LandmarkPage;

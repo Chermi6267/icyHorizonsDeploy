@@ -13,7 +13,7 @@ function GigaChat(props: Props) {
 
   return (
     <>
-      <h1 className={styles.giga_chat__main_text}>Giga Chat</h1>
+      <h2 className={styles.giga_chat__main_text}>Giga Chat</h2>
       <p ref={gigaTextRef} className={styles.giga_chat__giga_text}>
         {isError ? (
           "Произошла ошибка в работе Giga Chat. Повторите попытку позже"

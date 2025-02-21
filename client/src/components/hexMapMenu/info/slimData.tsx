@@ -16,7 +16,7 @@ function SlimData(props: Props) {
   ) : isError ? (
     <p className={styles.info_text}>Что-то пошло не так!</p>
   ) : (
-    <h1 className={styles.slim_data__text}>{regionName}</h1>
+    <h2 className={styles.slim_data__text}>{regionName}</h2>
   );
 }
 

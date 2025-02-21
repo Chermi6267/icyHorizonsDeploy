@@ -50,27 +50,22 @@ function Header(props: Props) {
       {authHandlerMemo}
       <header
         className={`${styles.header} ${isVisible ? "" : styles.header_hidden}`}
+        role="header"
       >
-        <div
-          className={styles.header__logo_container}
-          onClick={() => {
-            router.push("/");
-          }}
-        >
-          <Logo className={styles.logo_container__svg} />
-          <h1 className={styles.logo_container__text}>Icy Horizons</h1>
-        </div>
+        <nav className={styles.header__nav}>
+          <Link href="/" aria-label="Перейти на главную страницу">
+            <div className={styles.header__logo_container}>
+              <Logo className={styles.logo_container__svg} />
+              <h1 className={styles.logo_container__text}>Icy Horizons</h1>
+            </div>
+          </Link>
+        </nav>
 
-        <div className={styles.header__buttons_container}>
-          {/* <button
-            onClick={() => {
-              router.push("/about");
-            }}
-            className={styles.buttons_container__btn}
+        <nav className={styles.header__buttons_container}>
+          <Link
+            href={clientCondition ? "/profile" : "/auth"}
+            aria-label="Перейти в профиль или выполнить вход"
           >
-            О нас
-          </button> */}
-          <Link href={clientCondition ? "/profile" : "/auth"}>
             <div className={styles.buttons_container__user}>
               <Image
                 src={
@@ -80,30 +75,18 @@ function Header(props: Props) {
                       : user.avatar
                     : "/user.png"
                 }
-                alt="User"
+                alt={
+                  clientCondition
+                    ? `Аватар пользователя ${user.name}`
+                    : "Аватар пользователя"
+                }
                 fill
                 sizes="width: 100%; height: 100%"
                 className={`${styles.user__img} ${
                   clientCondition ? styles["user__img-auth"] : ""
                 }`}
+                role="img"
               />
-
-              <button className={styles.user__show_btn} />
-
-              <div
-                className={
-                  isUserMenu
-                    ? styles.user__info_wrapper
-                    : styles["user__info_wrapper-hidden"]
-                }
-              >
-                <div className={styles.info_wrapper__container}>
-                  <p className={styles.container__text}>
-                    {clientCondition ? user.email : "Вы не авторизованы"}
-                  </p>
-                </div>
-              </div>
-
               <div
                 className={
                   isUserMenu
@@ -136,7 +119,7 @@ function Header(props: Props) {
               </div>
             </div>
           </Link>
-        </div>
+        </nav>
       </header>
     </>
   );

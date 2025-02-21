@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, Suspense } from "react";
 import { socket } from "@/socket/socket";
 import { useDebounce } from "@/hook/useDebounce";
 import { handleMessage } from "./handleMessage";
@@ -53,6 +53,7 @@ function HexMapMenu(props: {
   const debounceCatFilter = useDebounce(catFilter, 1000);
   const debounceSelectedRegion = useDebounce(selectedRegion, 2000);
   const [isFirstRender, setIsFirstRender] = useState(true);
+  console.log("RERENDER");
 
   // ================================
 
@@ -144,24 +145,32 @@ function HexMapMenu(props: {
   }, []);
 
   return (
-    <div ref={hexMapRef} className={styles.hex_map_menu}>
-      <div className={styles.slim_data}>
+    <section
+      ref={hexMapRef}
+      className={styles.hex_map_menu}
+      aria-label="Интерактивная карта и информация о региона Республики Саха Якутия"
+    >
+      <aside className={styles.slim_data}>
         <SlimData
           regionName={regionData?.adminCenter.name}
           isLoading={isLoading}
           isError={isError}
         />
-      </div>
+      </aside>
 
-      <div className={styles.hex_map_menu__map_container}>
+      <article className={styles.hex_map_menu__map_container}>
         {useMemo(() => {
-          return <HexMap isGigaFetching={isGigaFetching} />;
+          return (
+            <Suspense>
+              <HexMap isGigaFetching={isGigaFetching} />
+            </Suspense>
+          );
         }, [isGigaFetching])}
-      </div>
+      </article>
 
-      <div className={styles.hex_map_menu__info_container}>
+      <article className={styles.hex_map_menu__info_container}>
         {innerWidth >= 1024 ? (
-          <div className={styles.info_container__main_data}>
+          <section className={styles.info_container__main_data}>
             {selectedRegion === "ALL" ? (
               <RepublicOfYakutia
                 data={{
@@ -181,23 +190,23 @@ function HexMapMenu(props: {
                 isError={isError}
               />
             )}
-          </div>
+          </section>
         ) : null}
 
-        <div className={styles.info_container__giga_chat}>
+        <section className={styles.info_container__giga_chat}>
           <GigaChat
             text={gigaText}
             gigaTextRef={gigaTextRef}
             isFetching={isGigaFetching}
             isError={isGigaError}
           />
-        </div>
+        </section>
 
-        <div className={styles.info_container__sub_data}>
+        <section className={styles.info_container__sub_data}>
           <SubData data={regionData} isLoading={isLoading} />
-        </div>
-      </div>
-    </div>
+        </section>
+      </article>
+    </section>
   );
 }
 

@@ -6,7 +6,6 @@ import "./globals.css";
 import Header from "@/components/header/header";
 import Catalog from "@/components/catalog/catalog";
 import { IAdminCenter, ICategory, ILandmark } from "@/interfaces/landmark";
-import AuthHandler from "@/components/auth/authHandler";
 import Footer from "@/components/footer/footer";
 import Tour from "@/components/tour/tour";
 import { useRef } from "react";
@@ -18,10 +17,8 @@ export default function Home(props: {
 }) {
   const { landmarks, adminCenter, categories } = props;
   const hexMapRef = useRef<HTMLDivElement>(null);
-
   return (
     <>
-      <AuthHandler />
       <Header />
       <main className={styles.main}>
         <HexMapMenu

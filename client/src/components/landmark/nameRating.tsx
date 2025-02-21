@@ -11,12 +11,10 @@ function NameRating(props: Props) {
   const stars = [1, 2, 3, 4, 5];
 
   return (
-    <div className={styles.landmark_name_rating}>
-      <div className={styles.landmark_name_rating__name}>
-        {landmarkData.name}
-      </div>
+    <section className={styles.landmark_name_rating}>
+      <h1 className={styles.landmark_name_rating__name}>{landmarkData.name}</h1>
 
-      <div className={styles.landmark_name_rating__rating}>
+      <article className={styles.landmark_name_rating__rating}>
         {stars.map((star, index) => {
           return Math.round(parseFloat(landmarkData.rating)) - 1 - index >=
             0 ? (
@@ -25,12 +23,12 @@ function NameRating(props: Props) {
             <Star key={star} className={styles["rating__svg-disabled"]} />
           );
         })}
-        {Math.round(parseFloat(landmarkData.rating))}
-      </div>
-      <div className={styles.landmark_name_rating__rating}>
+        {parseFloat(landmarkData.rating).toFixed(1)}
+      </article>
+      <article className={styles.landmark_name_rating__rating}>
         Отзывов: {landmarkData.comment.length}
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 

@@ -1,11 +1,4 @@
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  GeoJSON,
-  ZoomControl,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import L from "leaflet";
 import styles from "./styles.module.scss";
 import "leaflet/dist/leaflet.css";
@@ -43,21 +36,21 @@ function Map(props: Props) {
   const { cords, name } = props;
   const [isFirstRender, setIsFirstRender] = useState(true);
 
-  const zoomInClickHandler = () => {
-    const zoomIn = document.getElementsByClassName(
-      "leaflet-control-zoom-in"
-    )[0] as HTMLElement;
+  // const zoomInClickHandler = () => {
+  //   const zoomIn = document.getElementsByClassName(
+  //     "leaflet-control-zoom-in"
+  //   )[0] as HTMLElement;
 
-    zoomIn.click();
-  };
+  //   zoomIn.click();
+  // };
 
-  const zoomOutClickHandler = () => {
-    const zoomOut = document.getElementsByClassName(
-      "leaflet-control-zoom-out"
-    )[0] as HTMLElement;
+  // const zoomOutClickHandler = () => {
+  //   const zoomOut = document.getElementsByClassName(
+  //     "leaflet-control-zoom-out"
+  //   )[0] as HTMLElement;
 
-    zoomOut.click();
-  };
+  //   zoomOut.click();
+  // };
 
   useEffect(() => {
     if (isFirstRender) {
@@ -78,26 +71,34 @@ function Map(props: Props) {
   }, [isFirstRender]);
 
   return (
-    <MapContainer
-      className={styles.map}
-      zoom={3.2}
-      center={[65.735295, 129.114512]}
-      zoomControl={false}
-    >
-      <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
-      <Marker position={cords} icon={customIcon}>
-        <Popup className={styles.popup}>
-          <p>{name}</p>
-        </Popup>
-      </Marker>
+    <section className={styles.map}>
+      <MapContainer
+        className={styles.map__leaflet}
+        zoom={3}
+        center={[65.735295, 129.114512]}
+        zoomControl={false}
+        scrollWheelZoom={false}
+        doubleClickZoom={false}
+        maxBounds={[
+          [-90, -180], // Юго-западный угол
+          [90, 190], // Северо-восточный угол
+        ]}
+        maxBoundsViscosity={1.0} // Насколько строго придерживаться границ
+      >
+        <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+        <Marker position={cords} icon={customIcon}>
+          <Popup className={styles.popup}>
+            <p>{name}</p>
+          </Popup>
+        </Marker>
 
-      <GeoJSON
-        data={regionData as GeoJsonObjectType}
-        style={{ color: "#7653c8", fillColor: "#9c9ff1", fillOpacity: 0.5 }}
-      />
+        <GeoJSON
+          data={regionData as GeoJsonObjectType}
+          style={{ color: "#7653c8", fillColor: "#9c9ff1", fillOpacity: 0.5 }}
+        />
 
-      <ZoomControl position="topright" />
-      <div className={styles.zoom_btn_cont}>
+        {/* <ZoomControl position="topright" /> */}
+        {/* <div className={styles.zoom_btn_cont}>
         <button className={styles.zoom_btn} onClick={zoomInClickHandler}>
           +
         </button>
@@ -105,8 +106,9 @@ function Map(props: Props) {
         <button className={styles.zoom_btn} onClick={zoomOutClickHandler}>
           -
         </button>
-      </div>
-    </MapContainer>
+      </div> */}
+      </MapContainer>
+    </section>
   );
 }
 

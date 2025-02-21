@@ -38,8 +38,6 @@ function SearchMenu(props: Props) {
 
   return (
     <div className={styles.search_menu}>
-      {/* <SearchInput /> */}
-
       <FiltersButton
         buttonClassName={styles.sort_container__sort_btn}
         activeButtonClassName={styles["sort_container__sort_btn-active"]}

@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { authRouter } from "./routers/Auth";
 import { landmarkRouter } from "./routers/Landmark";
+import { LandmarkRepository } from "./repositories/Landmark";
 import { tourRouter } from "./routers/Tour";
 import { commentRouter } from "./routers/Comment";
 import { catRouter } from "./routers/Cat";
@@ -12,7 +13,9 @@ import { Server } from "socket.io";
 import { GigaChatService } from "./services/GigaChat";
 import { userRouter } from "./routers/User";
 import { configDotenv } from "dotenv";
+// import cron from "node-cron";
 configDotenv({ path: "./.env" });
+// const landmarkRepository = new LandmarkRepository();
 
 const app = express();
 app.use(cookieParser());
@@ -31,6 +34,17 @@ const server = http.createServer(app);
 export const io = new Server(server, {
   cors: { origin: process.env.CLIENT_URL },
 });
+
+// cron.schedule("* * * * *", async () => {
+//   await landmarkRepository
+//     .createTouristFlow("YKT")
+//     .then((res) => {
+//       console.log(res);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// });
 
 io.on("connection", (socket) => {
   socket.on("giga", async (data) => {

@@ -57,8 +57,8 @@ function Catalog(props: Props) {
   });
 
   return (
-    <div className={styles.catalog_wrapper}>
-      <div className={styles.catalog_wrapper__filters_menu}>
+    <section className={styles.catalog_wrapper}>
+      <aside className={styles.catalog_wrapper__filters_menu}>
         <FiltersMenu
           data={{
             selectedRegion: adminCenter,
@@ -67,9 +67,9 @@ function Catalog(props: Props) {
           hexMapRef={hexMapRef}
           setIsActive={() => setIsActive(!isActive)}
         />
-      </div>
+      </aside>
 
-      <div className={styles.catalog_wrapper__main_catalog}>
+      <article className={styles.catalog_wrapper__main_catalog}>
         {innerWidth >= 1023 ? (
           <SearchMenu data={sortVariables} hexMapRef={hexMapRef} />
         ) : (
@@ -84,8 +84,8 @@ function Catalog(props: Props) {
         )}
 
         <CatalogItems initialData={initialLandmarkData} />
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Slider from "../slider/slider";
 import styles from "./styles.module.scss";
 import Link from "next/link";
@@ -9,7 +8,6 @@ interface Props {}
 
 function Tour(props: Props) {
   const {} = props;
-  const router = useRouter();
   const tourData = [
     { id: 1, photoPath: "/SakhaSled/1.jpeg", landmarkId: 1 },
     { id: 2, photoPath: "/SakhaSled/2.jpeg", landmarkId: 2 },
@@ -18,10 +16,10 @@ function Tour(props: Props) {
   ];
 
   return (
-    <div className={styles.tour}>
-      <h1 className={styles.tour__title}>
+    <section className={styles.tour}>
+      <h2 className={styles.tour__title}>
         Авторские туры <span>SakhaSled</span> в Якутии
-      </h1>
+      </h2>
 
       <Slider className={styles.tour__slider} images={tourData} />
 
@@ -30,10 +28,15 @@ function Tour(props: Props) {
         эндуро, 4x4 и квадроциклах. Эксклюзивная рыбалка
       </h3>
 
-      <Link href={"https://sakhasled.com/"}>
-        <button className={styles.tour__btn}>Вперед</button>
-      </Link>
-    </div>
+      <nav>
+        <Link
+          aria-label="Туристическое агенство по Республике Саха Якутия Sakha Sled"
+          href={"https://sakhasled.com/"}
+        >
+          <button className={styles.tour__btn}>Перейти</button>
+        </Link>
+      </nav>
+    </section>
   );
 }
 
