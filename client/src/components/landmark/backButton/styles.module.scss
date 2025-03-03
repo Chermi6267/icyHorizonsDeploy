@@ -1,0 +1,65 @@
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
+
+.empty_btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: $text-color;
+  font-family: var(--comfortaa);
+
+  &__back_arrow {
+    display: flex;
+    width: 70vw;
+    gap: clamp(10px, 1.5vw, 25px);
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+  }
+}
+
+.back_arrow {
+  &__svg {
+    rotate: 90deg;
+    @include glass-shell;
+    width: 1.1vw;
+    height: 1.1vw;
+    padding: clamp(5px, 0.3vw, 12px);
+    border-radius: 100vw;
+    margin-top: 2px;
+  }
+
+  &__text {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .empty_btn {
+    &__back_arrow {
+      width: 80vw;
+    }
+  }
+
+  .back_arrow {
+    &__text {
+      padding-top: 1%;
+      margin: 0;
+    }
+
+    &__svg {
+      width: 2vw;
+      min-height: 20px;
+      min-width: 20px;
+      height: 2vw;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .empty_btn {
+    &__back_arrow {
+      width: 90vw;
+    }
+  }
+}

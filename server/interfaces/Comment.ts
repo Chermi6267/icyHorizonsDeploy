@@ -3,6 +3,9 @@ export interface IComment {
   stars: number;
   landmarkId: number;
   userId: number;
+  accessibility: number;
+  improvement: number;
+  tourismInfrastructure: number;
 }
 
 export interface ICommentModify {

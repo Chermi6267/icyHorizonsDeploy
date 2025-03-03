@@ -14,6 +14,7 @@ const pacifico = Pacifico({
   weight: "400",
   variable: "--pacifico_font",
 });
+
 const pixelifySans = Pixelify_Sans({
   subsets: ["cyrillic"],
   weight: "400",

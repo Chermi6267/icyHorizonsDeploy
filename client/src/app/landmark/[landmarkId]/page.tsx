@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import LandmarkContent from "./landmarkContent";
+import LandmarkContent from "@/components/landmark/landmarkContent";
 
 export const generateMetadata = async ({
   params,

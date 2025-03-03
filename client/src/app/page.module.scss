@@ -1,6 +1,8 @@
 @import "../scss/variables.scss";
 @import "../scss/mixins.scss";
 
+// 🟡 ATTENTION: You have the same code in your landmark component
+
 .body {
   background-image: url("/bg.png");
   background-size: 50%;
@@ -34,5 +36,4 @@
   @include flex-center;
   flex-direction: column;
   row-gap: 7vh;
-  transition: all ease-in-out 300ms;
 }

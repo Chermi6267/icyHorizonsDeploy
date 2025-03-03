@@ -43,22 +43,33 @@ model Profile {
 }
 
 model AdminCenter {
-  id          String        @unique
-  name        String        @unique
-  capital     String
-  area        Decimal       @default(0)
-  landmark    Landmark[]    @relation("LandmarkAdminCenter")
-  TouristFlow TouristFlow[]
+  id            String         @unique
+  name          String         @unique
+  capital       String
+  area          Decimal        @default(0)
+  landmark      Landmark[]     @relation("LandmarkAdminCenter")
+  touristFlow   TouristFlow[]
+  reviewMetrics ReviewMetrics?
 }
 
 model TouristFlow {
   id            Int         @id @default(autoincrement())
   views         Int
-  commentCount  Int
+  commentsCount Int
   month         Int
   year          Int
   adminCenterId String
   adminCenter   AdminCenter @relation(fields: [adminCenterId], references: [id], onDelete: Cascade)
+}
+
+model ReviewMetrics {
+  id                         Int         @id @default(autoincrement())
+  adminCenterId              String      @unique
+  adminCenter                AdminCenter @relation(fields: [adminCenterId], references: [id], onDelete: Cascade)
+  sumOfAccessibility         Int
+  sumOfImprovement           Int
+  sumOfTourismInfrastructure Int
+  commentsCount              Int
 }
 
 model Category {

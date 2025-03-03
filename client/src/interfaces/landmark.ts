@@ -21,7 +21,7 @@ export interface ILandmarksByAdminCenter {
   adminCenter: IAdminCenter;
 }
 
-interface IComment {
+export interface IComment {
   id: number;
   text: string;
   stars: string;

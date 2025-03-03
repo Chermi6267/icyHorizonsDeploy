@@ -53,6 +53,9 @@ export class CommentController {
 
       const landmarkId = parseInt(req.body.landmarkId, 10);
       const stars = parseFloat(req.body.stars);
+      const accessibility = parseFloat(req.body.accessibility);
+      const improvement = parseFloat(req.body.improvement);
+      const tourismInfrastructure = parseFloat(req.body.tourismInfrastructure);
       const text = req.body.text;
       const userId = req.user?.id;
 
@@ -72,6 +75,9 @@ export class CommentController {
         stars,
         landmarkId,
         userId,
+        accessibility,
+        improvement,
+        tourismInfrastructure,
       });
 
       if (comment === "LANDMARK") {

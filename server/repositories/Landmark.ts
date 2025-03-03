@@ -18,7 +18,7 @@ export class LandmarkRepository {
           .create({
             data: {
               views: 0,
-              commentCount: 0,
+              commentsCount: 1,
               adminCenterId: adminCenterId,
               month: date.getMonth(),
               year: date.getFullYear(),
@@ -37,7 +37,7 @@ export class LandmarkRepository {
     }
   }
 
-  async updateTouristFlow(adminCenterId: string) {
+  async updateTouristFlow(adminCenterId: string, isComment: boolean) {
     try {
       const result = await prisma.touristFlow.findFirst({
         where: { adminCenterId: adminCenterId },
@@ -47,15 +47,7 @@ export class LandmarkRepository {
       const date = new Date();
 
       if (result === null) {
-        await prisma.touristFlow.create({
-          data: {
-            views: 1,
-            commentCount: 0,
-            adminCenterId: adminCenterId,
-            month: date.getMonth(),
-            year: date.getFullYear(),
-          },
-        });
+        await this.createTouristFlow(adminCenterId);
       } else {
         await prisma.touristFlow.update({
           where: {
@@ -63,7 +55,8 @@ export class LandmarkRepository {
             adminCenterId: adminCenterId,
           },
           data: {
-            views: result.views + 1,
+            views: result.views + (isComment ? 0 : 1),
+            commentsCount: result.commentsCount + (isComment ? 1 : 0),
           },
         });
       }

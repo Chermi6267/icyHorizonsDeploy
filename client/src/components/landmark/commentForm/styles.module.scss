@@ -1,0 +1,130 @@
+@import "../../../scss/variables.scss";
+@import "../../../scss/mixins.scss";
+$px: clamp(5px, 1.5vw, 10px);
+
+.container {
+  @include glass-shell;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  width: min-content;
+  height: min-content;
+  gap: $px;
+  padding: clamp(10px, 1.5vw, 15px);
+
+  &__rating {
+    display: flex;
+    gap: $px;
+  }
+
+  &__text {
+    color: $text-color;
+    margin: 0;
+    font-size: medium;
+    text-wrap: nowrap;
+  }
+}
+
+.rating {
+  &__svg {
+    min-width: 1.1rem;
+    max-width: 1.3rem;
+    cursor: pointer;
+    transition: opacity 100ms ease-in;
+
+    &-disabled {
+      @extend .rating__svg;
+      opacity: 0.3;
+    }
+  }
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: clamp(10px, 1.5vw, 15px);
+
+  &__sub_rating {
+    display: flex;
+    gap: $px;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    width: 60%;
+  }
+
+  @mixin buttons-size {
+    width: 100%;
+    height: 7%;
+    min-height: 30px;
+  }
+
+  &__submit_btn {
+    @include buttons-size;
+    border-radius: 100vw;
+    border: 2px solid $light-purple-color;
+    color: $white-color;
+    background-color: $btn-bg-color;
+    font-family: var(--comfortaa);
+    font-optical-sizing: auto;
+    font-size: 1rem;
+    padding: 0.6rem;
+    height: max-content;
+    transition: all 100ms ease;
+    width: 40%;
+
+    &:focus {
+      border-color: $purple-active-color;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: $purple-active-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .container {
+    &__text {
+      text-wrap: wrap;
+    }
+  }
+}
+
+@media screen and (max-width: 684px) {
+  .container {
+    justify-content: space-between;
+    width: calc(100% - (clamp(10px, 1.5vw, 15px) * 2));
+  }
+
+  .wrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    &__sub_rating {
+      width: 100%;
+      grid-template-columns: repeat(1, 1fr);
+      gap: clamp(10px, 1.5vw, 15px);
+    }
+
+    &__submit_btn {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .wrapper {
+    &__sub_rating {
+      &__text {
+        font-size: 0.9rem;
+        word-break: break-all;
+      }
+    }
+  }
+}

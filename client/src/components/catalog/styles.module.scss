@@ -319,6 +319,7 @@
   @include flex-center;
   flex-direction: column;
   row-gap: 3vh;
+  overscroll-behavior: none;
 }
 
 .catalog_item {

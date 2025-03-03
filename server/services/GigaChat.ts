@@ -27,11 +27,13 @@ export class GigaChatService {
         return;
       } else {
         if (adminCenterId !== "ALL") {
-          await landmarkRepository.updateTouristFlow(adminCenterId).then(() => {
-            console.warn(
-              `☑  Запись для ${adminCenterId} обновлена успешно (TouristFlow)`
-            );
-          });
+          await landmarkRepository
+            .updateTouristFlow(adminCenterId, false)
+            .then(() => {
+              console.warn(
+                `☑  Запись для ${adminCenterId} обновлена успешно (TouristFlow)`
+              );
+            });
         }
       }
 

@@ -6,6 +6,18 @@ import { check } from "express-validator";
 export const commentRouter = Router();
 const commentController = new CommentController();
 
+const checkRating = (value: any) => {
+  if (Number.isNaN(parseFloat(value))) {
+    throw new Error("Неправильный формат рейтинга");
+  }
+
+  if (parseFloat(value) > 5.0) {
+    throw new Error("Неправильный формат рейтинга");
+  }
+
+  return true;
+};
+
 commentRouter.get("/all", commentController.getAllComments);
 
 commentRouter.get(
@@ -36,17 +48,22 @@ commentRouter.post(
 
     check("stars", "Неправильный формат рейтинга")
       .notEmpty()
-      .custom((value) => {
-        if (Number.isNaN(parseFloat(value))) {
-          throw new Error("Неправильный формат рейтинга");
-        }
+      .custom(checkRating),
 
-        if (parseFloat(value) > 5.0) {
-          throw new Error("Неправильный формат рейтинга");
-        }
+    check("accessibility", "Неправильный формат рейтинга accessibility")
+      .notEmpty()
+      .custom(checkRating),
 
-        return true;
-      }),
+    check("improvement", "Неправильный формат рейтинга improvement")
+      .notEmpty()
+      .custom(checkRating),
+
+    check(
+      "tourismInfrastructure",
+      "Неправильный формат рейтинга tourismInfrastructure"
+    )
+      .notEmpty()
+      .custom(checkRating),
   ],
   commentController.createComment
 );
