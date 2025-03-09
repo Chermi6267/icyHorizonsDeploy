@@ -13,6 +13,11 @@ export class UserRepository {
               header: true,
             },
           },
+          UserGroupAnalysis: {
+            select: {
+              name: true,
+            },
+          },
         },
       });
 
@@ -36,6 +41,34 @@ export class UserRepository {
       const result = await prisma.profile.update({
         where: { userId: userId },
         data: { name: newName },
+      });
+
+      return result;
+    } catch (error) {
+      throw Error(`Repository: ${error}`);
+    }
+  }
+
+  async getUserGroups() {
+    try {
+      const result = await prisma.userGroupAnalysis.findMany();
+
+      return result;
+    } catch (error) {
+      throw Error(`Repository: ${error}`);
+    }
+  }
+
+  async changeUserGroup(userId: number, newGroupId: number) {
+    try {
+      const candidate = await prisma.user.findUnique({ where: { id: userId } });
+
+      if (candidate === null) {
+        return "USER";
+      }
+      const result = await prisma.user.update({
+        where: { id: userId },
+        data: { userGroupAnalysisId: newGroupId },
       });
 
       return result;
@@ -93,6 +126,7 @@ export class UserRepository {
           email: true,
           role: true,
           loggedWith: true,
+          userGroupAnalysisId: true,
           profile: {
             select: {
               avatar: true,

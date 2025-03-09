@@ -23,7 +23,7 @@ const variants = {
 interface Props {
   refetch: () => void;
   setNeedRefetch: (value: boolean) => void;
-  landmarkId: string;
+  landmarkId: string | string[];
 }
 
 function CommentForm(props: Props) {

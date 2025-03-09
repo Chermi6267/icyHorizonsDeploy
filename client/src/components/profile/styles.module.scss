@@ -93,6 +93,8 @@
 
     &::before {
       content: "@";
+      display: inline-block;
+      width: 22px;
       font-size: 1.2rem;
       margin-right: 0.5vw;
     }

@@ -10,6 +10,7 @@ import { IUser, unsetUser } from "@/store/userSlice";
 import { Toaster } from "react-hot-toast";
 import { logOut } from "@/store/authSlice";
 import ImageCropper from "@/components/imageCropper/imageCropper";
+import SelectUserGroup from "./selectUserGroup/selectUserGroup";
 
 interface Props {
   user: IUser;
@@ -131,7 +132,6 @@ function Profile({ user }: Props) {
             onChange={handleAvatarChange}
           />
         </div>
-
         <div className={styles.profile__name_cont}>
           <div
             onBlur={() => {
@@ -162,10 +162,10 @@ function Profile({ user }: Props) {
             ✎
           </label>
         </div>
-
         <p spellCheck="false" className={styles.profile__email}>
           {user.email === "" ? "Ваше почта" : user.email}
         </p>
+        <SelectUserGroup groupId={user.groupId} />
 
         <button
           className={styles.profile__logout_btn}

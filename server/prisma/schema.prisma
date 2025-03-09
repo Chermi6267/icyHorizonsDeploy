@@ -14,16 +14,18 @@ model Role {
 }
 
 model User {
-  id           Int       @id @default(autoincrement())
-  email        String    @unique
-  hashPassword String?
-  loggedWith   String
-  roleId       Int
-  isVerified   Boolean   @default(false)
-  role         Role      @relation(fields: [roleId], references: [id])
-  profile      Profile?
-  comment      Comment[]
-  token        token?
+  id                  Int                @id @default(autoincrement())
+  email               String             @unique
+  hashPassword        String?
+  loggedWith          String
+  roleId              Int
+  isVerified          Boolean            @default(false)
+  role                Role               @relation(fields: [roleId], references: [id])
+  profile             Profile?
+  comment             Comment[]
+  token               token?
+  userGroupAnalysisId Int?
+  UserGroupAnalysis   UserGroupAnalysis? @relation(fields: [userGroupAnalysisId], references: [id])
 }
 
 model token {
@@ -50,6 +52,14 @@ model AdminCenter {
   landmark      Landmark[]     @relation("LandmarkAdminCenter")
   touristFlow   TouristFlow[]
   reviewMetrics ReviewMetrics?
+}
+
+model UserGroupAnalysis {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  nameForUser String
+  user        User[]
 }
 
 model TouristFlow {

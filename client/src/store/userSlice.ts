@@ -7,6 +7,7 @@ export interface IUser {
   avatar: string | null;
   name: string | null;
   header: string | null;
+  groupId: number | null;
 }
 
 const initialState: IUser = {
@@ -16,6 +17,7 @@ const initialState: IUser = {
   avatar: null,
   name: null,
   header: null,
+  groupId: null,
 };
 
 export const userSlice = createSlice({
@@ -29,6 +31,7 @@ export const userSlice = createSlice({
       state.avatar = action.payload.avatar;
       state.name = action.payload.name;
       state.header = action.payload.header || "";
+      state.groupId = action.payload.groupId || null;
     },
 
     unsetUser: (state) => {
@@ -38,6 +41,7 @@ export const userSlice = createSlice({
       state.avatar = null;
       state.name = null;
       state.header = null;
+      state.groupId = null;
     },
 
     setNewName: (state, action: PayloadAction<Pick<IUser, "name">>) => {
@@ -51,10 +55,20 @@ export const userSlice = createSlice({
     setNewHeader: (state, action: PayloadAction<Pick<IUser, "header">>) => {
       state.header = action.payload.header;
     },
+
+    setNewGroupId: (state, action: PayloadAction<Pick<IUser, "groupId">>) => {
+      state.groupId = action.payload.groupId;
+    },
   },
 });
 
-export const { setUser, unsetUser, setNewName, setNewAvatar, setNewHeader } =
-  userSlice.actions;
+export const {
+  setUser,
+  unsetUser,
+  setNewName,
+  setNewAvatar,
+  setNewHeader,
+  setNewGroupId,
+} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -6,9 +6,9 @@ import { isAuthenticated } from "../middlewares/isAuthenticated";
 import { multerMiddleware } from "../middlewares/multerUser";
 
 const userController = new UserController();
+userRouter.get("/groups", userController.getUserGroups);
 
 userRouter.get("/:id", userController.getUserDataById);
-
 userRouter.get("/", isAuthenticated, userController.getUserData);
 
 userRouter.put(
@@ -32,6 +32,17 @@ userRouter.put(
   isAuthenticated,
   multerMiddleware,
   userController.changeHeader
+);
+
+userRouter.put(
+  "/group",
+  isAuthenticated,
+  [
+    check("newGroupId", "Некорректный id пользовательской группы(new)")
+      .notEmpty()
+      .isNumeric(),
+  ],
+  userController.changeUserGroup
 );
 
 userRouter.get("/header/:imageName", userController.getHeader);

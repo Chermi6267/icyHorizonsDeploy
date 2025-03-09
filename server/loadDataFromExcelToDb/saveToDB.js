@@ -5,12 +5,14 @@ const loadRoles = require("./utils/loadRoles");
 const loadTours = require("./utils/loadTours");
 const loadCategories = require("./utils/loadCategories");
 const loadAdminCenters = require("./utils/loadAdminCenters");
+const loadUserGroupAnalysis = require("./utils/loadUserGroupAnalysis");
 const excelFilePath = "./data.xlsx";
 
 async function loadBasics(excelFilePath) {
   await loadRoles(excelFilePath);
   await loadAdminCenters(excelFilePath);
   await loadCategories(excelFilePath);
+  await loadUserGroupAnalysis(excelFilePath);
 }
 
 async function main(excelFilePath) {

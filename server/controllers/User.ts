@@ -23,6 +23,53 @@ export class UserController {
     }
   }
 
+  async changeUserGroup(req: IUserRequest, res: Response) {
+    try {
+      // Validation of the Registration Form
+      const validationErrors = validationResult(req);
+      if (validationErrors["errors"].length !== 0) {
+        return res
+          .status(422)
+          .json({ message: validationErrors["errors"][0]["msg"] });
+      }
+      const userId = req.user?.id;
+      if (userId === undefined) {
+        return res
+          .status(401)
+          .json({ message: "Не удалось получить access токен" });
+      }
+
+      const newGroupId = req.body.newGroupId;
+      const result = await userService.changeUserGroup(userId, newGroupId);
+
+      if (result === "USER") {
+        return res.status(404).json({ message: "Пользователь не найден" });
+      }
+
+      return res.json({
+        newGroupId: result.newGroupId,
+      });
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "Ошибка при смене имени пользователя" });
+    }
+  }
+
+  async getUserGroups(req: Request, res: Response) {
+    try {
+      const result = await userService.getUserGroups();
+
+      return res.json(result);
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "Ошибка при пользовательских групп" });
+    }
+  }
+
   async getUserData(req: IUserRequest, res: Response) {
     try {
       const userId = req.user?.id;
@@ -40,6 +87,7 @@ export class UserController {
 
       return res.json(result);
     } catch (error) {
+      console.error(error);
       return res
         .status(500)
         .json({ message: "Ошибка при получении данных пользователя" });

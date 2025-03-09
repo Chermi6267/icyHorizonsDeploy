@@ -36,6 +36,7 @@ export default function AuthHandler() {
             avatar: userData.data.profile.avatar,
             name: userData.data.profile.name,
             header: userData.data.profile.header,
+            groupId: userData.data.userGroupAnalysisId,
           })
         );
       })

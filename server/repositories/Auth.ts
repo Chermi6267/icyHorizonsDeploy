@@ -98,37 +98,60 @@ export class AuthRepository {
   async createUser(options: Omit<IReg, "sub">) {
     try {
       const { email, password, loggedWith, name, avatar } = options;
-
-      const user = await prisma.user.create({
-        data: {
-          email: email,
-          hashPassword: password,
-          role: {
-            connect: {
-              name: "USER",
-            },
-          },
-          loggedWith: loggedWith,
-          profile: {
-            create: {
-              name:
-                name === "" || name === undefined
-                  ? funnyNicknames[
-                      Math.floor(Math.random() * funnyNicknames.length)
-                    ]
-                  : name,
-              avatar: avatar,
-            },
-          },
-        },
-        select: {
-          id: true,
-          email: true,
-          role: true,
-          loggedWith: true,
-          profile: true,
-        },
+      const groupId = await prisma.userGroupAnalysis.findFirst({
+        where: { name: "Экотуристы" },
+        select: { id: true },
       });
+
+      const user = await prisma.user
+        .create({
+          data: {
+            email: email,
+            hashPassword: password,
+            role: {
+              connect: {
+                name: "USER",
+              },
+            },
+            loggedWith: loggedWith,
+            profile: {
+              create: {
+                name:
+                  name === "" || name === undefined
+                    ? funnyNicknames[
+                        Math.floor(Math.random() * funnyNicknames.length)
+                      ]
+                    : name,
+                avatar: avatar,
+              },
+            },
+          },
+          select: {
+            id: true,
+            email: true,
+            role: true,
+            loggedWith: true,
+            profile: true,
+          },
+        })
+        .then(async (res) => {
+          if (res !== null && groupId) {
+            await prisma.user.update({
+              where: {
+                id: res.id,
+              },
+              data: {
+                UserGroupAnalysis: {
+                  connect: {
+                    id: groupId.id,
+                  },
+                },
+              },
+            });
+          }
+
+          return res;
+        });
 
       return user;
     } catch (error) {

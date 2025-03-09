@@ -11,10 +11,42 @@ const tokenRepository = new TokenRepository();
 const fileRepository = new FileRepository();
 
 export class UserService {
+  private async updateTokens(
+    userId: number,
+    userData: any,
+    result: any
+  ): Promise<{ accessToken: string; refreshToken: string }> {
+    const newAccessToken = await tokenService.generateAccessToken({
+      id: userData.id,
+      email: userData.email,
+      role: userData.role.name,
+      loggedWith: userData.loggedWith,
+      avatar: result.avatar || "",
+      header: result.header || "",
+      name: result.name || "",
+    });
+
+    const newRefreshToken = await tokenService.generateRefreshToken({
+      id: userData.id,
+      email: userData.email,
+      role: userData.role.name,
+      loggedWith: userData.loggedWith,
+      avatar: result.avatar || "",
+      header: result.header || "",
+      name: result.name || "",
+    });
+
+    await tokenRepository.updateRefreshSession(userId, newRefreshToken);
+
+    return {
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    };
+  }
+
   async getUserDataById(userId: number) {
     try {
       const result = await userRepository.getUserDataById(userId);
-
       return result;
     } catch (error) {
       throw error;
@@ -24,6 +56,15 @@ export class UserService {
   async getUserData(userId: number) {
     try {
       const result = await userRepository.getUserData(userId);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserGroups() {
+    try {
+      const result = await userRepository.getUserGroups();
 
       return result;
     } catch (error) {
@@ -39,32 +80,27 @@ export class UserService {
         return "USER";
       }
 
-      const newAccessToken = await tokenService.generateAccessToken({
-        id: userData.id,
-        email: userData.email,
-        role: userData.role.name,
-        loggedWith: userData.loggedWith,
-        avatar: result.avatar || "",
-        header: result.header || "",
-        name: result.name || "",
-      });
-
-      const newRefreshToken = await tokenService.generateRefreshToken({
-        id: userData.id,
-        email: userData.email,
-        role: userData.role.name,
-        loggedWith: userData.loggedWith,
-        avatar: result.avatar || "",
-        header: result.header || "",
-        name: result.name || "",
-      });
-
-      await tokenRepository.updateRefreshSession(userId, newRefreshToken);
+      const tokens = await this.updateTokens(userId, userData, result);
 
       return {
         newName: result.name,
-        accessToken: newAccessToken,
-        refreshToken: newRefreshToken,
+        ...tokens,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async changeUserGroup(userId: number, newGroupId: number) {
+    try {
+      const result = await userRepository.changeUserGroup(userId, newGroupId);
+
+      if (result === "USER") {
+        return "USER";
+      }
+
+      return {
+        newGroupId: result.userGroupAnalysisId,
       };
     } catch (error) {
       throw error;
@@ -94,32 +130,11 @@ export class UserService {
         .catch((error) => {});
       await fileRepository.saveFile(newFilePath, file.buffer);
 
-      const newAccessToken = await tokenService.generateAccessToken({
-        id: userData.id,
-        email: userData.email,
-        role: userData.role.name,
-        loggedWith: userData.loggedWith,
-        avatar: result.avatar || "",
-        header: result.header || "",
-        name: result.name || "",
-      });
-
-      const newRefreshToken = await tokenService.generateRefreshToken({
-        id: userData.id,
-        email: userData.email,
-        role: userData.role.name,
-        loggedWith: userData.loggedWith,
-        avatar: result.avatar || "",
-        header: result.header || "",
-        name: result.name || "",
-      });
-
-      await tokenRepository.updateRefreshSession(userId, newRefreshToken);
+      const tokens = await this.updateTokens(userId, userData, result);
 
       return {
         avatar: result.avatar,
-        accessToken: newAccessToken,
-        refreshToken: newRefreshToken,
+        ...tokens,
       };
     } catch (error) {
       throw error;
@@ -149,32 +164,11 @@ export class UserService {
         .catch((error) => {});
       await fileRepository.saveFile(newFilePath, file.buffer);
 
-      const newAccessToken = await tokenService.generateAccessToken({
-        id: userData.id,
-        email: userData.email,
-        role: userData.role.name,
-        loggedWith: userData.loggedWith,
-        avatar: result.avatar || "",
-        header: result.header || "",
-        name: result.name || "",
-      });
-
-      const newRefreshToken = await tokenService.generateRefreshToken({
-        id: userData.id,
-        email: userData.email,
-        role: userData.role.name,
-        loggedWith: userData.loggedWith,
-        avatar: result.avatar || "",
-        header: result.header || "",
-        name: result.name || "",
-      });
-
-      await tokenRepository.updateRefreshSession(userId, newRefreshToken);
+      const tokens = await this.updateTokens(userId, userData, result);
 
       return {
         header: result.header,
-        accessToken: newAccessToken,
-        refreshToken: newRefreshToken,
+        ...tokens,
       };
     } catch (error) {
       throw error;
@@ -184,7 +178,6 @@ export class UserService {
   async getImage(image: string) {
     try {
       const imgBuffer = await fileRepository.getIMG(image);
-
       return imgBuffer;
     } catch (error) {
       throw error;
