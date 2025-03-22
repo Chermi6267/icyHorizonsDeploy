@@ -1,0 +1,142 @@
+@import "../../scss/mixins.scss";
+@import "../../scss/variables.scss";
+
+$gap: clamp(20px, 2vw, 30px);
+$height: 30vh;
+
+@mixin container {
+  padding: 15px;
+  height: $height;
+  width: calc(100% - 30px);
+  transition: all 400ms ease-in;
+}
+
+.container {
+  width: 70vw;
+  display: flex;
+  gap: $gap;
+  flex-direction: column;
+  opacity: 1;
+  justify-content: center;
+
+  &__item {
+    &-disable {
+      opacity: 0;
+      height: 0;
+      width: 0;
+      transition: all 400ms ease-in;
+    }
+
+    &:first-child {
+      @include glass-shell;
+      @include container;
+      outline-color: $purple-active-color;
+    }
+
+    &:last-child {
+      display: flex;
+      gap: $gap;
+    }
+  }
+}
+
+.item {
+  &__sub {
+    @include glass-shell;
+    @include container;
+
+    &-disable {
+      opacity: 0;
+      height: 0;
+      width: 0;
+      transition: all 400ms ease-in;
+    }
+
+    &:first-child {
+      outline-color: $pink;
+    }
+    &:last-child {
+      outline-color: $light-purple-color;
+    }
+  }
+}
+
+.text_info {
+  width: 70%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  word-break: break-all;
+  font-weight: 500;
+}
+
+.pie {
+  &:focus {
+    outline: none;
+    background-color: transparent;
+  }
+}
+
+.open_button_container {
+  width: 70vw;
+  display: flex;
+  justify-content: flex-start;
+
+  &__btn {
+    @include glass-shell;
+    color: $text-color;
+    padding: 10px 20px;
+    font-family: var(--comfortaa);
+    border: none;
+    width: 150px;
+  }
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &__text {
+    width: 100%;
+    font-weight: 500;
+    font-size: 1.05rem;
+    text-align: center;
+    word-wrap: break-word;
+  }
+}
+
+@media screen and (max-width: 1511px) {
+  .container {
+    &__item {
+      &:last-child {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .container {
+    width: 80vw;
+  }
+
+  .open_button_container {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 90vw;
+  }
+
+  .open_button_container {
+    width: 90vw;
+  }
+}

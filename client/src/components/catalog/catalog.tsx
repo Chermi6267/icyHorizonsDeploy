@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CatalogItems from "./catalogItems";
 import FiltersMenu from "./filterMenu/filtersMenu";
 import SearchAndFiltersMenu from "./filterMenu/searchAndFiltersMenu";
@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 import { IAdminCenter, ICategory, ILandmark } from "@/interfaces/landmark";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import useWindowWidth from "@/hook/useWindowWidth";
+import { useMediaQuery } from "react-responsive";
 
 interface Props {
   initialLandmarkData: ILandmark[];
@@ -20,7 +20,12 @@ function Catalog(props: Props) {
   const { initialLandmarkData, initialAdminCenterData, categories, hexMapRef } =
     props;
   const [isActive, setIsActive] = useState(false);
-  const innerWidth = useWindowWidth(1024);
+  const isMobile = useMediaQuery({ maxWidth: 1023 });
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const sortVariables = {
     variables: [
@@ -70,7 +75,7 @@ function Catalog(props: Props) {
       </aside>
 
       <article className={styles.catalog_wrapper__main_catalog}>
-        {innerWidth >= 1023 ? (
+        {!isMobile && hasMounted ? (
           <SearchMenu data={sortVariables} hexMapRef={hexMapRef} />
         ) : (
           <SearchAndFiltersMenu

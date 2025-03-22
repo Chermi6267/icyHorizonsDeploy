@@ -2,6 +2,60 @@ import prisma from "./prismaClient";
 import { ILandmark, IUpdateLandmark } from "../interfaces/Landmark";
 
 export class LandmarkRepository {
+  async getAdminCenters() {
+    try {
+      const adminCenters = await prisma.adminCenter.findMany({
+        select: { id: true },
+      });
+
+      return adminCenters;
+    } catch (error) {
+      throw new Error(`Repository: ${error}`);
+    }
+  }
+
+  async getReviewMetrics(adminCenterId: string) {
+    try {
+      const reviewMetrics = await prisma.reviewMetrics.findFirst({
+        where: { adminCenterId: adminCenterId },
+      });
+
+      return reviewMetrics;
+    } catch (error) {
+      throw new Error(`Repository: ${error}`);
+    }
+  }
+
+  async getTouristFlowByAdminCenterId(adminCenterId: string, count: number) {
+    try {
+      const latestTouristFlow = await prisma.touristFlow.findMany({
+        where: { adminCenterId },
+        orderBy: [{ year: "desc" }, { month: "desc" }],
+        take: count,
+      });
+
+      return latestTouristFlow;
+    } catch (error) {
+      throw new Error(`Repository: ${error}`);
+    }
+  }
+
+  async getUserGroupAnalysis() {
+    try {
+      const reviewMetrics = await prisma.user.groupBy({
+        by: ["userGroupAnalysisId"],
+        _count: { id: true },
+      });
+
+      return reviewMetrics.map(({ userGroupAnalysisId, _count }) => ({
+        id: userGroupAnalysisId,
+        count: _count.id,
+      }));
+    } catch (error) {
+      throw new Error(`Repository: ${error}`);
+    }
+  }
+
   async createTouristFlow(adminCenterId: string) {
     try {
       const date = new Date();

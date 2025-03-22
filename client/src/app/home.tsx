@@ -9,6 +9,7 @@ import { IAdminCenter, ICategory, ILandmark } from "@/interfaces/landmark";
 import Footer from "@/components/footer/footer";
 import Tour from "@/components/tour/tour";
 import { useRef } from "react";
+import AdminCenterStatistic from "@/components/AdminCenterStatistic/adminCenterStatistic";
 
 export default function Home(props: {
   landmarks: ILandmark[];
@@ -26,6 +27,8 @@ export default function Home(props: {
           initialLandmarkData={landmarks}
           initialAdminCenterData={adminCenter}
         />
+
+        <AdminCenterStatistic />
 
         <Tour />
 

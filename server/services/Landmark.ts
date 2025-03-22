@@ -8,11 +8,42 @@ const landmarkRepository = new LandmarkRepository();
 const fileRepository = new FileRepository();
 
 export class LandmarkService {
+  async createTouristFlow() {
+    try {
+      const adminCenters = await landmarkRepository.getAdminCenters();
+      adminCenters.map(
+        async (adminCenter: { id: string } & Record<string, any>) => {
+          await landmarkRepository.createTouristFlow(adminCenter.id);
+        }
+      );
+
+      return adminCenters;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getAdminCenter(adminCenterId: string) {
     try {
       const result = await landmarkRepository.getAdminCenterData(adminCenterId);
 
       return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatistics(adminCenterId: string) {
+    try {
+      const [reviewMetrics, userGroupAnalysis, touristFlow] = await Promise.all(
+        [
+          landmarkRepository.getReviewMetrics(adminCenterId),
+          landmarkRepository.getUserGroupAnalysis(),
+          landmarkRepository.getTouristFlowByAdminCenterId(adminCenterId, 12),
+        ]
+      );
+
+      return { reviewMetrics, userGroupAnalysis, touristFlow };
     } catch (error) {
       throw error;
     }

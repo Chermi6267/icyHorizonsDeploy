@@ -21,6 +21,21 @@ export class LandmarkController {
     }
   }
 
+  async getStatistics(req: Request, res: Response) {
+    try {
+      const { adminCenterId } = req.params;
+
+      const result = await landmarkService.getStatistics(adminCenterId);
+
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        message: "Ошибка при получении данных о административном центре",
+      });
+    }
+  }
+
   async getAllLandmarks(req: Request, res: Response) {
     try {
       const page = parseInt(req.params.page, 10) || 1;
@@ -88,6 +103,7 @@ export class LandmarkController {
           return parseInt(el, 10);
         });
       }
+
       const { adminCenter, landmarks } =
         await landmarkService.getLandmarksByCat(categoryArray, adminCenterId);
 

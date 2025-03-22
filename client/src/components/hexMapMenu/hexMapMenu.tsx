@@ -23,6 +23,7 @@ import api from "@/http/api";
 import useWindowWidth from "@/hook/useWindowWidth";
 import { useSearchParams } from "next/navigation";
 import { setAdminCenter } from "@/store/adminSlice";
+import { useMediaQuery } from "react-responsive";
 
 function HexMapMenu(props: {
   initialLandmarkData: ILandmark[];
@@ -53,7 +54,7 @@ function HexMapMenu(props: {
   const debounceCatFilter = useDebounce(catFilter, 1000);
   const debounceSelectedRegion = useDebounce(selectedRegion, 2000);
   const [isFirstRender, setIsFirstRender] = useState(true);
-  console.log("RERENDER");
+  const isMobile = useMediaQuery({ maxWidth: 1023 });
 
   // ================================
 
@@ -169,7 +170,7 @@ function HexMapMenu(props: {
       </article>
 
       <article className={styles.hex_map_menu__info_container}>
-        {innerWidth >= 1024 ? (
+        {!isMobile && !isFirstRender ? (
           <section className={styles.info_container__main_data}>
             {selectedRegion === "ALL" ? (
               <RepublicOfYakutia

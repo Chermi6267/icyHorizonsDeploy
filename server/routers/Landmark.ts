@@ -8,6 +8,11 @@ import { check } from "express-validator";
 export const landmarkRouter = Router();
 const landmarkController = new LandmarkController();
 
+landmarkRouter.get(
+  "/center/statistics/:adminCenterId",
+  landmarkController.getStatistics
+);
+
 landmarkRouter.get("/all/:page/:limit", landmarkController.getAllLandmarks);
 
 landmarkRouter.get(
