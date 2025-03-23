@@ -8,11 +8,12 @@ async function loadUserGroupAnalysis(excelFilePath) {
 
     const rolesSheet = workbook.Sheets["userGroupAnalysis"];
     const rolesData = xlsx.utils.sheet_to_json(rolesSheet);
-    console.log(rolesData);
 
     try {
-      await prisma.userGroupAnalysis.createMany({
-        data: rolesData,
+      await prisma.userGroupAnalysis.deleteMany().then(async () => {
+        await prisma.userGroupAnalysis.createMany({
+          data: rolesData,
+        });
       });
     } catch (error) {
       console.log(error);
