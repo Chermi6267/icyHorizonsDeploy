@@ -2,6 +2,8 @@ import { GigaChat } from "gigachat-node";
 import { Socket } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { LandmarkRepository } from "../repositories/Landmark";
+import { configDotenv } from "dotenv";
+configDotenv({ path: ".env" });
 
 const client = new GigaChat(process.env.GIGA_CHAT_TOKEN!, true, true, true);
 const landmarkRepository = new LandmarkRepository();
