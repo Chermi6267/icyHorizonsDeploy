@@ -91,7 +91,9 @@ $height: 30vh;
     padding: 10px 20px;
     font-family: var(--comfortaa);
     border: none;
-    width: 150px;
+    min-width: 200px;
+    width: max-content;
+    word-break: keep-all;
   }
 }
 
@@ -177,5 +179,19 @@ $height: 30vh;
 
   .open_button_container {
     width: 90vw;
+  }
+
+  .pie_chart_cont {
+    flex-direction: column;
+  }
+
+  .item {
+    &__sub {
+      height: 45vh;
+    }
+  }
+
+  .pie_chart_cont {
+    align-items: center;
   }
 }

@@ -1,7 +1,6 @@
 import { Pie, ResponsiveContainer, PieChart, Tooltip, Cell } from "recharts";
 import styles from "../styles.module.scss";
 import { useMediaQuery } from "react-responsive";
-import { color } from "framer-motion";
 
 interface Props {
   data: {

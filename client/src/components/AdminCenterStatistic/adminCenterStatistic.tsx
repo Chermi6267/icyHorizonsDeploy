@@ -4,6 +4,7 @@ import { RootState } from "@/store";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./styles.module.scss";
 import TouristFlow from "./charts/lineChart";
 import UserGroupAnalysis from "./charts/userGroupAnalysis";
@@ -50,12 +51,12 @@ interface AdminCenterStatisticResponse {
 function AdminCenterStatistic(props: Props) {
   const {} = props;
 
-  const selectedRegion = useSelector((state: RootState) => {
-    return state.hexMap.selectedRegion;
-  });
-  const nameSelectedRegion = useSelector((state: RootState) => {
-    return state.adminCenter.name;
-  });
+  const selectedRegion = useSelector(
+    (state: RootState) => state.hexMap.selectedRegion
+  );
+  const nameSelectedRegion = useSelector(
+    (state: RootState) => state.adminCenter.name
+  );
   const debounceSelectedRegion = useDebounce(selectedRegion, 1500);
   const [isOpen, setIsOpen] = useState(true);
 
@@ -124,55 +125,46 @@ function AdminCenterStatistic(props: Props) {
       ]
     : null;
 
-  const content =
-    !isLoading && !isLoadingGroup ? (
-      <section className={styles.container}>
-        <article className={styles.container__item}>
-          <TouristFlow
-            text={`Туристическая активность — ${nameSelectedRegion}`}
-            data={statistics.touristFlow}
-          />
-        </article>
-        <article className={styles.container__item}>
-          <div className={styles.item__sub}>
-            <ReviewMetrics
-              text={`Оценка достопримечательностей — ${nameSelectedRegion}`}
-              data={reviewMetricsData}
-            />
-          </div>
-          <div className={styles.item__sub}>
-            <UserGroupAnalysis data={userGroupAnalysisData} />
-          </div>
-        </article>
-      </section>
-    ) : isError ? (
-      <p className={styles.text_info}>Ошибка</p>
-    ) : (
-      <p className={styles.text_info}>Ошибка</p>
-    );
-
-  const openButton = (
-    <div className={styles.open_button_container}>
-      <button
-        className={styles.open_button_container__btn}
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
-        {isOpen ? "Скрыть" : "Показать"}
-      </button>
-    </div>
-  );
-
   return selectedRegion !== "ALL" ? (
-    isOpen ? (
-      <>
-        {openButton}
-        {content}
-      </>
-    ) : (
-      openButton
-    )
+    <>
+      <div className={styles.open_button_container}>
+        <button
+          className={styles.open_button_container__btn}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? "Скрыть статистику" : "Показать статистику"}
+        </button>
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.section
+            className={styles.container}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <article className={styles.container__item}>
+              <TouristFlow
+                text={`Туристическая активность — ${nameSelectedRegion}`}
+                data={statistics.touristFlow}
+              />
+            </article>
+            <article className={styles.container__item}>
+              <div className={styles.item__sub}>
+                <ReviewMetrics
+                  text={`Оценка достопримечательностей — ${nameSelectedRegion}`}
+                  data={reviewMetricsData}
+                />
+              </div>
+              <div className={styles.item__sub}>
+                <UserGroupAnalysis data={userGroupAnalysisData} />
+              </div>
+            </article>
+          </motion.section>
+        )}
+      </AnimatePresence>
+    </>
   ) : (
     <p className={styles.text_info}>
       Выберите район на карте, чтобы увидеть его статистику.
