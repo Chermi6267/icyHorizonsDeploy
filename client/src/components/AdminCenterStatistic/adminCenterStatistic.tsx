@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./styles.module.scss";
 import TouristFlow from "./charts/lineChart";
-import UserGroupAnalysis from "./charts/UserGroupAnalysis";
+import UserGroupAnalysis from "./charts/userGroupAnalysis";
 import ReviewMetrics from "./charts/reviewMetrics";
 
 interface Props {}

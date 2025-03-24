@@ -111,6 +111,45 @@ $height: 30vh;
   }
 }
 
+.pie_chart_cont {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  &__label_cont {
+    display: flex;
+    flex-direction: column;
+    min-width: max-content;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    width: 50%;
+  }
+}
+
+.label_cont {
+  $circleSize: 10px;
+
+  &__text {
+    word-break: keep-all;
+    position: relative;
+    margin-left: calc(2 * $circleSize);
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: $circleSize;
+      height: $circleSize;
+      border-radius: 100vw;
+      top: 50%;
+      transform: translateY(-50%);
+      left: calc(-2 * $circleSize);
+      background-color: var(--circleColor);
+    }
+  }
+}
+
 @media screen and (max-width: 1511px) {
   .container {
     &__item {

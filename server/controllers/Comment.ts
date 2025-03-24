@@ -93,9 +93,7 @@ export class CommentController {
       return res.json(comment);
     } catch (error) {
       console.error(error);
-      return res
-        .status(500)
-        .json({ message: "Ошибка при получении всех отзывов" });
+      return res.status(500).json({ message: "Ошибка при создании отзыва" });
     }
   }
 
