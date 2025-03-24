@@ -64,8 +64,6 @@ function SearchAndFiltersMenu(props: Props) {
   return (
     <>
       <div className={styles.search_menu} ref={searchInputRef}>
-        {/* <SearchInput /> */}
-
         <FiltersButton
           buttonClassName={styles.sort_container__sort_filters_btn}
           activeButtonClassName={

@@ -20,7 +20,6 @@ import { IAdminCenter, ILandmark } from "@/interfaces/landmark";
 import { sortByRating } from "@/utils/sortByRating";
 import { sortByCommentsLength } from "@/utils/sortByCommentsLength";
 import api from "@/http/api";
-import useWindowWidth from "@/hook/useWindowWidth";
 import { useSearchParams } from "next/navigation";
 import { setAdminCenter } from "@/store/adminSlice";
 import { useMediaQuery } from "react-responsive";
@@ -41,7 +40,6 @@ function HexMapMenu(props: {
   const gigaTextRef = useRef<HTMLDivElement | null>(null);
   const [isGigaFetching, setIsGigaFetching] = useState(false);
   const [isGigaError, setIsGigaError] = useState(false);
-  const innerWidth = useWindowWidth(1023);
   const [bestLandmark, setBestLandmark] = useState(
     sortByRating(initialLandmarkData, "desc")
   );
@@ -144,6 +142,8 @@ function HexMapMenu(props: {
       socket.off("message", onMessageHandler);
     };
   }, []);
+
+  console.log("R");
 
   return (
     <section

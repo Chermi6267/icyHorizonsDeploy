@@ -60,17 +60,12 @@ function AdminCenterStatistic(props: Props) {
   const debounceSelectedRegion = useDebounce(selectedRegion, 1500);
   const [isOpen, setIsOpen] = useState(true);
 
-  const { data: groups, isLoading: isLoadingGroup } = useQuery({
+  const { data: groups } = useQuery({
     queryKey: ["userGroups"],
     queryFn: async () => api.get("/user/groups").then((res) => res.data),
   });
 
-  const {
-    data: statistics,
-    isError,
-    isLoading,
-    refetch,
-  } = useQuery<AdminCenterStatisticResponse>({
+  const { data: statistics, refetch } = useQuery<AdminCenterStatisticResponse>({
     queryKey: ["adminCenterStatistic", selectedRegion],
     queryFn: async () =>
       api
@@ -88,7 +83,7 @@ function AdminCenterStatistic(props: Props) {
     }
   }, [debounceSelectedRegion, refetch]);
 
-  if (!statistics) {
+  if (!statistics || !groups) {
     return null;
   }
 
@@ -167,7 +162,7 @@ function AdminCenterStatistic(props: Props) {
     </>
   ) : (
     <p className={styles.text_info}>
-      Выберите район на карте, чтобы увидеть его статистику.
+      Выберите район на карте, чтобы увидеть его статистику
     </p>
   );
 }

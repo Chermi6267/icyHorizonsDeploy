@@ -77,12 +77,13 @@ function UserGroupAnalysis(props: Props) {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
+
           {isMobile ? (
             <ul className={styles.pie_chart_cont__label_cont}>
               {data.map((entry, index) => {
                 return (
                   <li
-                    key={`label_{index}`}
+                    key={`label_${index}`}
                     style={
                       {
                         "--circleColor": COLORS[index % COLORS.length],
