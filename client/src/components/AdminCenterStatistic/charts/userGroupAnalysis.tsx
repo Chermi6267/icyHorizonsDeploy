@@ -83,6 +83,7 @@ function UserGroupAnalysis(props: Props) {
               {data.map((entry, index) => {
                 return (
                   <li
+                    key={`label_{index}`}
                     style={
                       {
                         "--circleColor": COLORS[index % COLORS.length],
