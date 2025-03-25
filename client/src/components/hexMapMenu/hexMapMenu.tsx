@@ -143,8 +143,6 @@ function HexMapMenu(props: {
     };
   }, []);
 
-  console.log("R");
-
   return (
     <section
       ref={hexMapRef}

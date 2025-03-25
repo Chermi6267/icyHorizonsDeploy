@@ -101,7 +101,7 @@ async function createComments() {
           const comment = await prisma.comment.create({
             data: {
               text: `${comments[i % comments.length]}`,
-              stars: Math.floor(Math.random() * 4) + 1,
+              stars: Math.floor(Math.random() * 3) + 3,
               landmark: {
                 connect: {
                   id: landmark.id, // Используем id конкретного landmark
@@ -122,13 +122,13 @@ async function createComments() {
             },
             update: {
               sumOfAccessibility: {
-                increment: Math.floor(Math.random() * 4) + 1,
+                increment: Math.floor(Math.random() * 3) + 3,
               },
               sumOfImprovement: {
-                increment: Math.floor(Math.random() * 4) + 1,
+                increment: Math.floor(Math.random() * 3) + 3,
               },
               sumOfTourismInfrastructure: {
-                increment: Math.floor(Math.random() * 4) + 1,
+                increment: Math.floor(Math.random() * 3) + 3,
               },
               commentsCount: {
                 increment: 1,
@@ -137,9 +137,9 @@ async function createComments() {
             create: {
               // Если запись не существует, создаем новую
               adminCenterId: center,
-              sumOfAccessibility: Math.floor(Math.random() * 4) + 1,
-              sumOfImprovement: Math.floor(Math.random() * 4) + 1,
-              sumOfTourismInfrastructure: Math.floor(Math.random() * 4) + 1,
+              sumOfAccessibility: Math.floor(Math.random() * 3) + 3,
+              sumOfImprovement: Math.floor(Math.random() * 3) + 3,
+              sumOfTourismInfrastructure: Math.floor(Math.random() * 3) + 3,
               commentsCount: 1,
             },
           });
