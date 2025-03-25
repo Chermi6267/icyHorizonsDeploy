@@ -33,7 +33,7 @@ function TouristFlow(props: Props) {
   const preparedData = data.map((el) => {
     return {
       name: `${months[el.month]} ${el.year}`,
-      value: ((el.views + el.commentsCount) / 2) * 10,
+      value: (el.views + el.commentsCount) / 2,
     };
   });
 
