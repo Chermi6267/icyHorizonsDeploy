@@ -159,15 +159,17 @@
 // }
 
 .rating {
-  $ratingSvgSize: clamp(10px, 2vw, 20px);
+  $ratingSvgSize: 17px;
 
   &__svg {
-    fill: rgba(98, 0, 255, 0.3);
+    // fill: rgba(98, 0, 255, 0.8);
     width: $ratingSvgSize;
+    opacity: 1;
 
     &-disabled {
-      fill: rgba(200, 165, 255, 0.3);
+      // fill: rgba(97, 70, 141, 0.3);
       width: $ratingSvgSize;
+      opacity: 0.5;
     }
   }
 

@@ -338,6 +338,7 @@
     @include flex-center;
     justify-content: space-between;
     max-height: 20%;
+    gap: 10px;
   }
 
   &__photo_description_cont {
