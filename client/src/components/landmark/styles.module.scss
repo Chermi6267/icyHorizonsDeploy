@@ -159,6 +159,18 @@
 // }
 
 .rating {
+  $ratingSvgSize: clamp(10px, 2vw, 20px);
+
+  &__svg {
+    fill: rgba(98, 0, 255, 0.3);
+    width: $ratingSvgSize;
+
+    &-disabled {
+      fill: rgba(200, 165, 255, 0.3);
+      width: $ratingSvgSize;
+    }
+  }
+
   &__svg-empty {
     fill: rgba(200, 165, 255, 0.3);
     width: max(20px, 2vh);
@@ -367,13 +379,6 @@
 //     height: max(20px, 2vh);
 //   }
 // }
-
-.rating {
-  &__svg-empty {
-    fill: rgba(200, 165, 255, 0.3);
-    width: max(20px, 2vh);
-  }
-}
 
 @media screen and (max-width: 1023px) {
   .landmark_name_rating {

@@ -18,16 +18,12 @@ export const generateMetadata = async ({
 };
 
 const LandmarkPage = async ({ params }: { params: { landmarkId: string } }) => {
-  const landmarkResponse = await fetch(
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/landmark/id/${params.landmarkId}`,
-    {
-      next: {
-        revalidate: 60 * 30,
-        tags: [`landmark${params.landmarkId}`],
-      },
-    }
+    { cache: "no-store" }
   );
-  const landmark = await landmarkResponse.json();
+
+  const landmark = await response.json();
 
   return <LandmarkContent initialLandmarkData={landmark} />;
 };

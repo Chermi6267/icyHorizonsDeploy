@@ -94,6 +94,23 @@ $height: 30vh;
     min-width: 200px;
     width: max-content;
     word-break: keep-all;
+    transition: all ease-in-out 100ms;
+
+    @mixin active {
+      color: $green-color;
+      outline-color: $purple-active-color;
+      transition: all ease-in-out 100ms;
+    }
+
+    &::focus {
+      @include active;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        @include active;
+      }
+    }
   }
 }
 
