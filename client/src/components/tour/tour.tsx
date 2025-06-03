@@ -39,5 +39,5 @@ function Tour(props: Props) {
     </section>
   );
 }
-
+//
 export default Tour;
