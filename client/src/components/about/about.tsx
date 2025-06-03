@@ -29,30 +29,6 @@ function About(props: Props) {
           <div className={styles.avatar_role}>
             <div
               className={styles.avatar_role__image}
-              style={{ backgroundImage: `url("/maksKim.png")` }}
-            />
-            <h2
-              className={styles.name_desc__prof}
-              style={{ fontFamily: "var(--pacifico_font)" }}
-            >
-              Дизайнер
-            </h2>
-          </div>
-          <div className={styles.name_desc}>
-            <h2 className={styles.name_desc__prof}>Максим Ким</h2>
-            <p className={styles.name_desc__desc}>
-              У этого парня явно проблемы с башкой, но если нужно придумать
-              классную фичу — он тут, как тут
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.cont}>
-        <div className={styles.cont__item}>
-          <div className={styles.avatar_role}>
-            <div
-              className={styles.avatar_role__image}
               style={{ backgroundImage: `url("/victorChernikov.png")` }}
             />
             <h2

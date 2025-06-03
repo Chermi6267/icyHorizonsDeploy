@@ -31,7 +31,7 @@ function Tour(props: Props) {
       <nav>
         <Link
           aria-label="Туристическое агенство по Республике Саха Якутия Sakha Sled"
-          href={"https://sakhasled.com/"}
+          href={"https://sakhasled.clients.site/"}
         >
           <button className={styles.tour__btn}>Перейти</button>
         </Link>
