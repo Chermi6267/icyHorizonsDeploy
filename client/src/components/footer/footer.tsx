@@ -11,7 +11,7 @@ function Footer(props: Props) {
 
   return (
     <footer className={styles.footer}>
-      <p>Designed by Victor Chernikov and Maksim Kim.</p>
+      <p>Designed by Victor Chernikov.</p>
       <button
         onClick={() => {
           router.push("/about");
